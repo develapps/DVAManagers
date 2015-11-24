@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'DVAManagers_Example', :exclusive => true do
+  pod "DVAManagers", :path => "../"
+end
+
+target 'DVAManagers_Tests', :exclusive => true do
+  pod "DVAManagers", :path => "../"
+
+  
+end
