@@ -1,0 +1,6 @@
+framework module Pods_DVAManagers_Example {
+  umbrella header "Pods-DVAManagers_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

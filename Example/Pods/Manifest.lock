@@ -1,0 +1,14 @@
+PODS:
+  - DVAManagers (0.1.0)
+
+DEPENDENCIES:
+  - DVAManagers (from `../`)
+
+EXTERNAL SOURCES:
+  DVAManagers:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DVAManagers: cadada6c391da8ecebcea4488db1d2792e6c64c3
+
+COCOAPODS: 0.39.0
