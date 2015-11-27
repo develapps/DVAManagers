@@ -1,0 +1,69 @@
+{
+  "name": "DVAManagers",
+  "version": "1.0.0",
+  "summary": "Common DVAManagers for iOS Apps",
+  "description": "",
+  "homepage": "https://bitbucket.org/dvalibs/DVAManagers",
+  "license": "MIT",
+  "authors": {
+    "Pablo Romeu": "pablo.romeu@develapps.com"
+  },
+  "source": {
+    "git": "https://bitbucket.com/DVALibs/DVAManagers.git",
+    "tag": "1.0.0",
+    "submodules": true
+  },
+  "social_media_url": "https://twitter.com/pabloromeu",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/DVAManagers.h",
+  "public_header_files": "Pod/Classes/DVAManagers.h",
+  "subspecs": [
+    {
+      "name": "DVANetworkPaginatedResource",
+      "dependencies": {
+        "AFNetworking": [
+          "~> 2.6"
+        ],
+        "DVACache": [
+          "~>1.1"
+        ]
+      },
+      "source_files": "Pod/Classes/DVANetworkPaginatedResource/*.{h,m}",
+      "public_header_files": "Pod/Classes/DVANetworkPaginatedResource/*.{h}"
+    },
+    {
+      "name": "DVAPhotoPickerManager",
+      "frameworks": "MobileCoreServices",
+      "source_files": "Pod/Classes/DVAPhotoPickerManager/*.{h,m}",
+      "public_header_files": "Pod/Classes/DVAPhotoPickerManager/*.{h}"
+    },
+    {
+      "name": "DVALocationManager",
+      "frameworks": "CoreLocation",
+      "source_files": "Pod/Classes/DVALocationManager/*.{h,m}",
+      "public_header_files": "Pod/Classes/DVALocationManager/*.{h}"
+    },
+    {
+      "name": "DVAFacebookManager",
+      "dependencies": {
+        "FBSDKCoreKit": [
+          "~> 4.8"
+        ],
+        "FBSDKLoginKit": [
+          "~> 4.8"
+        ],
+        "FBSDKShareKit": [
+          "~> 4.8"
+        ],
+        "DVACache": [
+          "~>1.1"
+        ]
+      },
+      "source_files": "Pod/Classes/DVAFacebookManager/*.{h,m}",
+      "public_header_files": "Pod/Classes/DVAFacebookManager/*.{h}"
+    }
+  ]
+}

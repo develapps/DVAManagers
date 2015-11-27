@@ -1,0 +1,223 @@
+//
+//  DVALocationManager.m
+//  Pods
+//
+//  Created by Pablo Romeu on 24/11/15.
+//
+//
+
+#import "DVALocationManager.h"
+
+#pragma mark -
+#pragma mark - Private Interface
+
+@interface DVALocationManager () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong)   CLLocationManager   *locationManager;
+@property (nonatomic, copy)     locationHandler         completionBlock;
+@property (nonatomic, copy)     locationAuthHandler     authCompletionBlock;
+@property (strong, nonatomic)   CLLocation          *lastUserLocation;
+
+@end
+
+#pragma mark -
+#pragma mark - Implementation
+
+@implementation DVALocationManager
+@synthesize completionBlock     = _completionBlock;
+@synthesize authCompletionBlock = _authCompletionBlock;
+
+#pragma mark -
+#pragma mark - Initializers
+
++ (DVALocationManager *)sharedInstance {
+    static dispatch_once_t onceToken;
+    static DVALocationManager *_sharedInstance = nil;
+    
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [DVALocationManager  new];
+    });
+    
+    return _sharedInstance;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.locationManager = [CLLocationManager new];
+        self.locationManager.delegate           = self;
+        self.locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
+        self.locationManager.distanceFilter     = 500;
+    }
+    return self;
+}
+
+#pragma mark -
+#pragma mark - Setters
+
+-(void)setDva_LocationAccurancy:(CLLocationAccuracy)dva_LocationAccurancy{
+    self.locationManager.desiredAccuracy = dva_LocationAccurancy;
+}
+
+-(void)setDva_LocationDistance:(CLLocationDistance)dva_LocationDistance{
+    self.locationManager.distanceFilter = dva_LocationDistance;
+}
+
+-(void)setCompletionBlock:(locationHandler)completionBlock{
+    __weak typeof(self) this = self;
+    _completionBlock = ^(NSArray <CLLocation *> *validLocations,NSError*error){
+        __weak typeof(this) strongSelf = this;
+        if (strongSelf.debug) NSLog(@"-- %s -- \n Calling completion block with locations %@ and error %@",__PRETTY_FUNCTION__,validLocations,error);
+        if (completionBlock) completionBlock(validLocations,error);
+    };
+}
+
+-(void)setAuthCompletionBlock:(locationAuthHandler)authCompletionBlock{
+    __weak typeof(self) this = self;
+    _authCompletionBlock = ^(CLAuthorizationStatus status,NSError*error){
+        __weak typeof(this) strongSelf = this;
+        if (strongSelf.debug) NSLog(@"-- %s -- \n Calling auth block with authorization %i and error %@",__PRETTY_FUNCTION__,status,error);
+        if (authCompletionBlock) authCompletionBlock(status,error);
+    };
+}
+
+
+#pragma mark -
+#pragma mark - Getters
+
+-(locationAuthHandler)authCompletionBlock{
+    if (_authCompletionBlock) return _authCompletionBlock;
+    return ^(CLAuthorizationStatus status,NSError*error){
+        if (_debug) NSLog(@"-- %s -- \n No auth block set and tried to auth with authorization %i and error %@",__PRETTY_FUNCTION__,status,error);
+    };
+}
+
+-(locationHandler)completionBlock{
+    if (_completionBlock) return _completionBlock;
+    return ^(NSArray <CLLocation * >*validLocations,NSError*error){
+        if (_debug) NSLog(@"-- %s -- \n No completion block set and tried to execute with locations %@ and error %@",__PRETTY_FUNCTION__,validLocations,error);
+    };
+}
+
+
+-(CLAuthorizationStatus)dva_LocationAuthType{
+    if (!_dva_LocationAuthType) {
+        return kCLAuthorizationStatusAuthorizedWhenInUse;
+    }
+    return _dva_LocationAuthType;
+}
+
+-(CLAuthorizationStatus)dva_currentAuthStatus{
+    return [CLLocationManager authorizationStatus];
+}
+
+#pragma mark -
+#pragma mark - Locations
+
+- (void)dva_askForAuthorizationIfNeededWithAuthBlock:(locationAuthHandler)authBlock{
+    self.authCompletionBlock = authBlock;
+    if (![CLLocationManager locationServicesEnabled]) {
+        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_errorWithType:DVALocationManagerErrorLocationDisabled]);
+    }
+    else{
+        switch ([self dva_currentAuthStatus]) {
+            case kCLAuthorizationStatusDenied:
+            {
+                self.authCompletionBlock(kCLAuthorizationStatusDenied,[NSError dva_errorWithType:DVALocationManagerErrorLocationDenied]);
+            }
+                break;
+            case kCLAuthorizationStatusRestricted:
+            {
+                self.authCompletionBlock(kCLAuthorizationStatusRestricted,[NSError dva_errorWithType:DVALocationManagerErrorLocationRestricted]);
+            }
+                break;
+            case kCLAuthorizationStatusAuthorizedAlways:
+            {
+                self.authCompletionBlock(kCLAuthorizationStatusAuthorizedAlways,nil);
+            }
+                break;
+            case kCLAuthorizationStatusAuthorizedWhenInUse:
+            {
+                self.authCompletionBlock(kCLAuthorizationStatusAuthorizedWhenInUse,nil);
+            }
+                break;
+
+            case kCLAuthorizationStatusNotDetermined:
+            {
+                switch (self.dva_LocationAuthType) {
+                    case kCLAuthorizationStatusAuthorizedAlways:
+                        [self.locationManager requestAlwaysAuthorization];
+                        break;
+                    case kCLAuthorizationStatusAuthorizedWhenInUse:
+                        [self.locationManager requestWhenInUseAuthorization];
+                        break;
+                        
+                    default:
+                        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_errorWithType:DVALocationManagerErrorAuthUnknown]);
+                        break;
+                }
+            }
+            default:
+                break;
+        }
+    }
+}
+
+
+- (void)dva_requestLocation:(locationHandler)handler{
+    self.completionBlock = handler;
+    [self dva_askForAuthorizationIfNeededWithAuthBlock:^(CLAuthorizationStatus status, NSError *error) {
+        if (error) { // Auth error
+            self.completionBlock(nil,error);
+        }
+        else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
+            self.completionBlock(nil,[NSError dva_errorWithType:DVALocationManagerErrorAuthBelowRequired
+                                                        andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
+        }
+        else{ // Ok
+            [self.locationManager requestLocation];
+        }
+    }];
+}
+
+- (void)dva_startUpdatingLocation:(locationHandler)handler {
+    self.completionBlock = handler;
+    [self dva_askForAuthorizationIfNeededWithAuthBlock:^(CLAuthorizationStatus status, NSError *error) {
+        if (error) { // Auth error
+            self.completionBlock(nil,error);
+        }
+        else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
+            self.completionBlock(nil,[NSError dva_errorWithType:DVALocationManagerErrorAuthBelowRequired
+                                                        andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
+        }
+        else{ // Ok
+            [self.locationManager startUpdatingLocation];
+        }
+    }];
+}
+
+- (void)dva_stopUpdatingLocation {
+    self.completionBlock = nil;
+    [self.locationManager stopUpdatingLocation];
+}
+
+#pragma mark -
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    [self dva_askForAuthorizationIfNeededWithAuthBlock:_authCompletionBlock];
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations {
+    self.completionBlock(locations,nil);
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    self.completionBlock(nil,error);
+}
+
+@end
