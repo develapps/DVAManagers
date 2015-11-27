@@ -65,14 +65,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-sK-NVo">
-                                <rect key="frame" x="20" y="20" width="560" height="560"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-sK-NVo">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="XLd-sK-NVo" secondAttribute="bottom" id="SiY-UF-Bfv"/>
                             <constraint firstAttribute="trailing" secondItem="XLd-sK-NVo" secondAttribute="trailing" id="UkD-FA-cW3"/>
                             <constraint firstItem="XLd-sK-NVo" firstAttribute="top" secondItem="TpU-gO-2f1" secondAttribute="top" id="WyP-Vx-0oj"/>
                             <constraint firstItem="XLd-sK-NVo" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="jPU-IR-7Tq"/>
