@@ -1,0 +1,6 @@
+framework module DVAManagers {
+  umbrella header "DVAManagers-umbrella.h"
+
+  export *
+  module * { export * }
+}
