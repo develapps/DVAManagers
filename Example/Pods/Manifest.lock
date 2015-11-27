@@ -45,7 +45,8 @@ PODS:
   - DVAManagers/DVANetworkPaginatedResource (1.0.0):
     - AFNetworking (~> 2.6)
     - DVACache (~> 1.1)
-  - DVAManagers/DVAPhotoPickerManager (1.0.0)
+  - DVAManagers/DVAPhotoPickerManager (1.0.0):
+    - DVACategories/NSString (~> 1.0)
   - DVANetworkTestStubs (1.0.0):
     - AFNetworking (~> 2.6)
     - OHHTTPStubs (~> 4.6)
@@ -89,7 +90,7 @@ SPEC CHECKSUMS:
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   DVACache: d246a62adce8da9c06023fbd9382bff9db4dc013
   DVACategories: c5ba01a73ba1904d815406210795c3a79a898b5f
-  DVAManagers: b0845270b3eae612a0daff68b2da7e2c96a93c68
+  DVAManagers: 70700b9356ac2c1dc1f45b49d1edab9d9bebe9ea
   DVANetworkTestStubs: bacd5c40b148975fc2bdf2d1cfb90a63f015b9fe
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
   FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4

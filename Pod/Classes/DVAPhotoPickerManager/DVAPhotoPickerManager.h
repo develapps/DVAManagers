@@ -7,29 +7,37 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import <MobileCoreServices/MobileCoreServices.h>
 #import <UIKit/UIKit.h>
+#import "NSError+DVAPhotoPickerManager.h"
 
-@protocol DVAPhotoPickerManagerDelegate;
+#error create rotation postprocessing
+typedef enum : NSUInteger {
+    DVAPhotoPickerManagerPostProcessActionCompress,
+    DVAPhotoPickerManagerPostProcessActionRotate,
+} DVAPhotoPickerManagerPostProcessAction;
+
+typedef enum : NSUInteger {
+    DVAPhotoPickerManagerSourceTypeAsk           = 0,
+    DVAPhotoPickerManagerSourceTypePhotoLibrary  = 1,
+    DVAPhotoPickerManagerSourceTypeCamera        = 2,
+    DVAPhotoPickerManagerSourceTypeSavedPhotos   = 3,
+} DVAPhotoPickerManagerSourceType;
+
+typedef void(^photoPickerCompletion)(UIImage*image,NSError*error);
 
 @interface DVAPhotoPickerManager : NSObject
 
-@property (weak, nonatomic) id<DVAPhotoPickerManagerDelegate> delegate;
-@property (assign, nonatomic) BOOL allowsEditing;
+-(instancetype)initWithViewController:(UIViewController*)controller andCompletionBlock:(photoPickerCompletion)completion;
++(void)dva_presentPhotoPickerOnViewController:(UIViewController*)controller
+                                             withType:(DVAPhotoPickerManagerSourceType)type
+                                  withCompletionBlock:(photoPickerCompletion)completion;
 
-- (void) setDataToHandlerWithView:(UIView *)view;
-- (void) showActionSheetPhotoOptionsInController:(UIViewController *)controller;
-- (void) useCamera;
-- (void) useCameraRoll;
+@property (nonatomic,copy) NSArray <NSNumber*> *dva_postProcessActions;
+@property (nonatomic) BOOL dva_allowsEditing;
+@property (nonatomic) BOOL dva_showsControlls;
+@property (nonatomic) BOOL dva_savesToPhotoAlbum;
 
-@end
-
-@protocol DVAPhotoPickerManagerDelegate <NSObject>
-
-- (void) pickerManagerPresentSelectPictureViewController:(UIViewController *)viewControllerToPresent WithAnimation: (BOOL) animation;
-- (void) pickerManagerDismissSelectPictureViewController:(UIViewController *)viewControllerToPresent WithAnimation: (BOOL) animation;
-- (void) pickerManagerImageSelected:(UIImage *)imageSelected;
+-(void)dva_showActionSheetPhotoOptions;
 
 @end
 

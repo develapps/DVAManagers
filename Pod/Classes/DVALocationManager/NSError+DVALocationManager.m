@@ -13,12 +13,12 @@ static NSString *const kDVALocationManagerAuthStatusKey = @"kDVALocationManagerA
 
 @implementation NSError (DVALocationManager)
 
-+(NSError*)dva_errorWithType:(DVALocationManagerError)errorType{
-    return [NSError dva_errorWithType:errorType andData:nil];
++(NSError*)dva_locationErrorWithType:(DVALocationManagerError)errorType{
+    return [NSError dva_locationErrorWithType:errorType andData:nil];
 }
 
 
-+(NSError*)dva_errorWithType:(DVALocationManagerError)errorType
++(NSError*)dva_locationErrorWithType:(DVALocationManagerError)errorType
                      andData:(NSDictionary*)userData{
     return [NSError errorWithDomain:kDVALocationManagerErrorDomain code:errorType userInfo:userData];
 }

@@ -7,81 +7,112 @@
 //
 
 #import "DVAPhotoPickerManager.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <DVACategories/NSString+DVALocalized.h>
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 @interface DVAPhotoPickerManager() <UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong)   UIImage *imageSelected;
-@property (nonatomic, strong)   UIView  *view;
-@property (nonatomic, strong)   UIImagePickerController *imagePicker;
-@property (nonatomic)           BOOL                    usingCamera;
+@property (nonatomic,weak)      UIViewController                *viewController;
+@property (nonatomic)           DVAPhotoPickerManagerSourceType sourceType;
+@property (nonatomic, strong)   UIImagePickerController         *imagePicker;
+@property (nonatomic, copy)     photoPickerCompletion           completionBlock;
 
 @end
 
 @implementation DVAPhotoPickerManager
 
-- (instancetype)init {
-    if (self = [super init]) {
-        _allowsEditing = YES;
+-(instancetype)initWithViewController:(UIViewController*)controller andCompletionBlock:(photoPickerCompletion)completion
+{
+    self = [super init];
+    if (self) {
+        _dva_allowsEditing      = NO;
+        _dva_showsControlls     = YES;
+        _completionBlock        = completion;
+        _viewController         = controller;
     }
-    
     return self;
 }
 
-#pragma mark - Set helper
-
-- (void) setDataToHandlerWithView:(UIView *) view {
-    self.view = view;
++(void)dva_presentPhotoPickerOnViewController:(UIViewController *)controller
+                                             withType:(DVAPhotoPickerManagerSourceType)type
+                                  withCompletionBlock:(photoPickerCompletion)completion{
+    DVAPhotoPickerManager*manager = [[DVAPhotoPickerManager alloc] initWithViewController:controller andCompletionBlock:completion];
+    manager.sourceType = type;
+    manager.imagePicker = [manager createImagePickerController];
+    [controller presentViewController:manager.imagePicker animated:YES completion:nil];
 }
 
-#pragma mark - UIImagePickerController delegate methods
+#pragma mark - Main methods
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString * mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+
+-(void)dva_showActionSheetPhotoOptions{
+    NSAssert(self.viewController, @"No view controller configured");
+    UIAlertController * view=   [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:[@"select_choice" dva_localizedString]
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
     
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage * image;
-        image = [info objectForKey:UIImagePickerControllerEditedImage];
-        
-        if (!image) {
-            image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        }
-        
-        //        if (image.imageOrientation != UIImageOrientationUp) {
-        //            image = [image fixOrientation];
-        //        }
-        //
-        //        //__ Fix orientation in the image (only in camera)
-        //        if (self.usingCamera) {
-        //            image = [image fixOrientation];
-        //        }
-        
-        //__ Reduce image to screen size
-        //        CGSize screenSize=[[UIScreen mainScreen] bounds].size;
-        //        CGSize reducedSize;
-        //        if (image.size.width>image.size.height) {
-        //            reducedSize=CGSizeMake(screenSize.width, screenSize.width*image.size.height/image.size.width);
-        //        }
-        //        else{
-        //            reducedSize=CGSizeMake(screenSize.height*image.size.width/image.size.height, screenSize.height);
-        //        }
-        //        image = [UIImage imageWithImage:image scaledToSize:reducedSize];
-        
-        
-        //----------------------//
-        //__ Transform the png into jpg image
-        UIImage *jpgImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 1.0)];
-        
-        self.imageSelected = jpgImage;
-        
-        UIImageWriteToSavedPhotosAlbum(self.imageSelected, nil, nil, nil);
-        
-        [self.delegate pickerManagerImageSelected:self.imageSelected];
-    }
+    UIAlertAction* takePhoto = [UIAlertAction
+                                actionWithTitle:[@"take_photo"  dva_localizedString]
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    [DVAPhotoPickerManager dva_presentPhotoPickerOnViewController:self.viewController
+                                                                                         withType:DVAPhotoPickerManagerSourceTypeCamera
+                                                                              withCompletionBlock:self.completionBlock];
+                                    
+                                }];
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    UIAlertAction* gallery = [UIAlertAction
+                              actionWithTitle:[@"gallery_action" dva_localizedString]
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * action)
+                              {
+                                  [DVAPhotoPickerManager dva_presentPhotoPickerOnViewController:self.viewController
+                                                                                       withType:DVAPhotoPickerManagerSourceTypePhotoLibrary
+                                                                            withCompletionBlock:self.completionBlock];
+                                  
+                              }];
+    
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:[@"cancel_button" dva_localizedString]
+                             style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [view dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    
+    
+    [view addAction:takePhoto];
+    [view addAction:gallery];
+    [view addAction:cancel];
+    
+    [self.viewController presentViewController:view animated:YES completion:nil];
+    
 }
+
+#pragma mark - Helper
+
+- (UIImagePickerController *)createImagePickerController{
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
+    self.imagePicker.sourceType = self.sourceType==DVAPhotoPickerManagerSourceTypeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.mediaTypes = [NSArray arrayWithObjects:
+                                   (NSString *) kUTTypeImage,
+                                   nil];
+    self.imagePicker.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    
+    self.imagePicker.allowsEditing          = self.dva_allowsEditing;
+    self.imagePicker.showsCameraControls    = self.dva_showsControlls;
+    return self.imagePicker;
+}
+
+#pragma mark - PostProcessing options
 
 UIImage* rotate(UIImage* src, UIImageOrientation orientation)
 {
@@ -106,126 +137,63 @@ UIImage* rotate(UIImage* src, UIImageOrientation orientation)
     return image;
 }
 
--(UIImage *)compraseImage:(UIImage *)largeImage {
-    double compressionRatio = 1;
-    int resizeAttempts = 5;
+
+
+#pragma mark - UIImagePickerController delegate methods
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSString * mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    UIImage *theImage;
     
-    NSData * imgData = UIImageJPEGRepresentation(largeImage,compressionRatio);
-    
-    NSLog(@"Starting Size: %lu", (unsigned long)[imgData length]);
-    
-    //Trying to push it below around about 0.4 meg
-    while ([imgData length] > 124000 && resizeAttempts > 0) {
-        resizeAttempts -= 1;
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage * image;
+        image = [info objectForKey:UIImagePickerControllerEditedImage];
         
-        NSLog(@"Image was bigger than 400000 Bytes. Resizing.");
-        NSLog(@"%i Attempts Remaining",resizeAttempts);
+        if (!image) {
+            image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        }
         
-        //Increase the compression amount
-        compressionRatio = compressionRatio*0.5;
-        NSLog(@"compressionRatio %f",compressionRatio);
-        //Test size before compression
-        NSLog(@"Current Size: %lu",(unsigned long)[imgData length]);
-        imgData = UIImageJPEGRepresentation(largeImage,compressionRatio);
+#warning transformations
         
-        //Test size after compression
-        NSLog(@"New Size: %lu",(unsigned long)[imgData length]);
+        //        if (image.imageOrientation != UIImageOrientationUp) {
+        //            image = [image fixOrientation];
+        //        }
+        //
+        //        //__ Fix orientation in the image (only in camera)
+        //        if (self.usingCamera) {
+        //            image = [image fixOrientation];
+        //        }
+        
+        //__ Reduce image to screen size
+        //        CGSize screenSize=[[UIScreen mainScreen] bounds].size;
+        //        CGSize reducedSize;
+        //        if (image.size.width>image.size.height) {
+        //            reducedSize=CGSizeMake(screenSize.width, screenSize.width*image.size.height/image.size.width);
+        //        }
+        //        else{
+        //            reducedSize=CGSizeMake(screenSize.height*image.size.width/image.size.height, screenSize.height);
+        //        }
+        //        image = [UIImage imageWithImage:image scaledToSize:reducedSize];
+        
+        
+        //----------------------//
+        //__ Transform the png into jpg image
+        theImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 1.0)];
+        if (self.dva_savesToPhotoAlbum) UIImageWriteToSavedPhotosAlbum(theImage, nil, nil, nil);
     }
     
-    return [UIImage imageWithData:imgData];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        if (self.completionBlock) self.completionBlock(theImage,nil);
+    }];
 }
 
--(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    if (error) {
-        
-    }
-}
 
-//Cancel
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        if (self.completionBlock)  self.completionBlock(nil,[NSError dva_photoErrorWithType:DVALocationManagerErrorCancelled]);
+    }];
 }
 
-
-
-/* Method to create a UIImagePickerController (for Camera o PhotoLibrary) */
-- (UIImagePickerController *) createImagePickerControllerWithTypeCamera:(BOOL) typeCamera AndAllowsEditing: (BOOL) allowsEditing {
-    self.usingCamera = typeCamera;
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.delegate = self;
-    self.imagePicker.sourceType = typeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
-    self.imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                   (NSString *) kUTTypeImage,
-                                   nil];
-    self.imagePicker.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    
-    self.imagePicker.allowsEditing = allowsEditing;
-    
-    return self.imagePicker;
-}
-
-- (void) useCamera {
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
-        UIImagePickerController *imagePicker = [self createImagePickerControllerWithTypeCamera:YES AndAllowsEditing:self.allowsEditing];
-        
-        [self.delegate pickerManagerPresentSelectPictureViewController:imagePicker WithAnimation:YES];
-    }
-}
-
-- (void) useCameraRoll {
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeSavedPhotosAlbum]){
-        UIImagePickerController *imagePicker = [self createImagePickerControllerWithTypeCamera:NO AndAllowsEditing:self.allowsEditing];
-        
-        [self.delegate pickerManagerPresentSelectPictureViewController:imagePicker WithAnimation:YES];
-    }
-}
-
-- (void) showActionSheetPhotoOptionsInController:(UIViewController *)controller {
-//    
-//    UIAlertController * view=   [UIAlertController
-//                                 alertControllerWithTitle:nil
-//                                 message:[self.language languageSelectedStringForKey:@"select_choice"]
-//                                 preferredStyle:UIAlertControllerStyleActionSheet];
-//    
-//    UIAlertAction* takePhoto = [UIAlertAction
-//                                actionWithTitle:[self.language languageSelectedStringForKey:@"take_photo"]
-//                                style:UIAlertActionStyleDefault
-//                                handler:^(UIAlertAction * action)
-//                                {
-//                                    [self useCamera];
-//                                    
-//                                    
-//                                }];
-//    
-//    
-//    UIAlertAction* gallery = [UIAlertAction
-//                              actionWithTitle:[self.language languageSelectedStringForKey:@"gallery_action"]
-//                              style:UIAlertActionStyleDefault
-//                              handler:^(UIAlertAction * action)
-//                              {
-//                                  [self useCameraRoll];
-//                                  
-//                              }];
-//    
-//    UIAlertAction* cancel = [UIAlertAction
-//                             actionWithTitle:[self.language languageSelectedStringForKey:@"cancel_button"]
-//                             style:UIAlertActionStyleCancel
-//                             handler:^(UIAlertAction * action)
-//                             {
-//                                 [view dismissViewControllerAnimated:YES completion:nil];
-//                                 
-//                             }];
-//    
-//    
-//    
-//    [view addAction:takePhoto];
-//    [view addAction:gallery];
-//    [view addAction:cancel];
-//    
-//    [controller presentViewController:view animated:YES completion:nil];
-//    
-    
-}
 
 
 @end

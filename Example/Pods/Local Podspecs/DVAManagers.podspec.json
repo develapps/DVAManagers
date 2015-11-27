@@ -37,6 +37,12 @@
     {
       "name": "DVAPhotoPickerManager",
       "frameworks": "MobileCoreServices",
+      "resources": "Pod/Assets/DVAPhotoPickerManager/*",
+      "dependencies": {
+        "DVACategories/NSString": [
+          "~>1.0"
+        ]
+      },
       "source_files": "Pod/Classes/DVAPhotoPickerManager/*.{h,m}",
       "public_header_files": "Pod/Classes/DVAPhotoPickerManager/*.{h}"
     },
