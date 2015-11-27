@@ -20,7 +20,10 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
 /**
  This class provides a generalized location manager. 
  
+ For GPX track testing: http://www.gpsvisualizer.com/draw/
+ 
  @warning do not forget to include the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription . Info: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/CoreLocation/CoreLocation.html
+ 
  
  @since 1.0.0
  */
@@ -55,13 +58,13 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
 @property (nonatomic) BOOL debug;
 
 /**
- The location accurancy. Defaults to kCLLocationAccuracyKilometer
+ The location accurancy. Defaults to kCLLocationAccuracyHundredMeters
  
  @since 1.0.0
  */
 @property (nonatomic) CLLocationAccuracy dva_LocationAccurancy;
 /**
- The location minimum distance for continuous location updates. Defaults to 500 (meters)
+ The location minimum distance for continuous location updates. Defaults to kCLDistanceFilterNone (measure in meters)
  
  @since 1.0.0
  */

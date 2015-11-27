@@ -79,6 +79,9 @@
                             <constraint firstItem="XLd-sK-NVo" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="jPU-IR-7Tq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="XLd-sK-NVo" id="e20-o9-wz0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

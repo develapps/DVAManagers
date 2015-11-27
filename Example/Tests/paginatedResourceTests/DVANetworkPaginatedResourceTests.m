@@ -15,13 +15,13 @@ static NSString *const theUrl=@"http://www.google.es";
 static NSString *const theEndPoint=@"/v1/fake";
 static NSString *const theSecondPage=@"/v1/fake/?page=2";
 
-@interface Tests : XCTestCase
+@interface DVANetworkPaginatedResourceTests : XCTestCase
 @property (nonatomic,strong) AFHTTPSessionManager *manager;
 @property (nonatomic,strong) DVANetworkPaginatedResource *paginatedResource;
 
 @end
 
-@implementation Tests
+@implementation DVANetworkPaginatedResourceTests
 
 - (void)setUp
 {
@@ -44,7 +44,7 @@ static NSString *const theSecondPage=@"/v1/fake/?page=2";
                                  @(kDVANetworkStubConfiguratorValueDebug)       : @(kStubsEnabled),
                                  @(kDVANetworkStubConfiguratorValueEndpoint)    : theEndPoint,
                                  @(kDVANetworkStubConfiguratorValueType)        : @(kDVAStubGET),
-                                 @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"FirstPage"],
+                                 @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"FirstPage" inBundle:[NSBundle bundleForClass:[self class]]],
 
                                  };
         
@@ -53,7 +53,7 @@ static NSString *const theSecondPage=@"/v1/fake/?page=2";
                                       @(kDVANetworkStubConfiguratorValueDebug)       : @(kStubsEnabled),
                                       @(kDVANetworkStubConfiguratorValueEndpoint)    : theSecondPage,
                                       @(kDVANetworkStubConfiguratorValueType)        : @(kDVAStubGET),
-                                      @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"SecondPage"],
+                                      @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"SecondPage" inBundle:[NSBundle bundleForClass:[self class]]],
                                       
                                       };
         
@@ -101,7 +101,7 @@ static NSString *const theSecondPage=@"/v1/fake/?page=2";
                                       @(kDVANetworkStubConfiguratorValueDebug)       : @(kStubsEnabled),
                                       @(kDVANetworkStubConfiguratorValueEndpoint)    : theEndPoint,
                                       @(kDVANetworkStubConfiguratorValueType)        : @(kDVAStubGET),
-                                      @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"FirstPage"],
+                                      @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"FirstPage" inBundle:[NSBundle bundleForClass:[self class]]],
                                       
                                       };
         
@@ -110,7 +110,7 @@ static NSString *const theSecondPage=@"/v1/fake/?page=2";
                                             @(kDVANetworkStubConfiguratorValueDebug)       : @(kStubsEnabled),
                                             @(kDVANetworkStubConfiguratorValueEndpoint)    : theSecondPage,
                                             @(kDVANetworkStubConfiguratorValueType)        : @(kDVAStubGET),
-                                            @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"SecondPage"],
+                                            @(kDVANetworkStubConfiguratorValueJson)        : [DVANetworkStubConfigurator dva_readJsonFile:@"SecondPage" inBundle:[NSBundle bundleForClass:[self class]]],
                                             
                                             };
         

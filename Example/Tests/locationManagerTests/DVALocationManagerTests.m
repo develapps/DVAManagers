@@ -19,7 +19,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     _manager = [[DVALocationManager alloc] init];
-    _manager.debug = YES;
+    _manager.debug = NO;
 }
 
 - (void)tearDown {
@@ -38,11 +38,32 @@
     [self waitForExpectationsWithTimeout:5 handler:nil];
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)DISABLED_testContinuousLocation {
+    // Continuous location cannot be tested
+    __block NSUInteger validWaypoints = 3;
+    
+    XCTestExpectation *allLocations = [self expectationWithDescription:@"location"];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[DVALocationManager sharedInstance] setDva_LocationDistance:kCLDistanceFilterNone];
+        [[DVALocationManager sharedInstance] setDva_LocationAccurancy:kCLLocationAccuracyBest];
+        [[DVALocationManager sharedInstance] dva_stopUpdatingLocation];
+        [[DVALocationManager sharedInstance] dva_startUpdatingLocation:^(NSArray<CLLocation *> *validLocations, NSError *error) {
+            NSLog(@"LOCATION %@ ERROR: %@",validLocations,error);
+            //            XCTAssert(!error, @"ERROR: Call failed: %@",error);
+            //            XCTAssert([validLocations count]==1,@"ERROR: validLocations should contain 1 result, contains: %@",validLocations);
+            //            XCTAssert([[validLocations firstObject] isKindOfClass:[CLLocation class]],@"ERROR: validLocations does not contain a valid location");
+            if (validWaypoints==0){
+                [[DVALocationManager sharedInstance] dva_stopUpdatingLocation];
+                [allLocations fulfill];
+            }
+            validWaypoints--;
+        }];
+    });
+    
+    [self waitForExpectationsWithTimeout:15 handler:nil];
 }
+
+
 
 @end
