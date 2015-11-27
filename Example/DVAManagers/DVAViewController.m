@@ -7,7 +7,7 @@
 //
 
 #import "DVAViewController.h"
-
+#import <DVAManagers/DVALocationManager.h>
 @interface DVAViewController ()
 
 @end
@@ -18,6 +18,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    if ([[DVALocationManager sharedInstance] dva_currentAuthStatus] < [[DVALocationManager sharedInstance] dva_LocationAuthType]) [[DVALocationManager sharedInstance] dva_requestLocation:^(NSArray<CLLocation *> *validLocations, NSError *error) {
+        ;
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning

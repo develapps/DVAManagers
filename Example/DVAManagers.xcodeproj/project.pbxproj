@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25580A95101566B1E663ABAC /* Pods_DVAManagers_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE41C7A223EFB3DA50A1722E /* Pods_DVAManagers_Example.framework */; };
+		3DE8FC364D11E42E16FEAB2F /* libPods-DVAManagers_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -20,9 +20,16 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */; };
+		6EE076271C084F6000CE5408 /* vienna-graz-by-car.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6EE0761F1C084F6000CE5408 /* vienna-graz-by-car.gpx */; };
+		6EE076281C084F6000CE5408 /* vienna-ring-bikeride.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076201C084F6000CE5408 /* vienna-ring-bikeride.gpx */; };
+		6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */; };
+		6EE0762A1C084F6000CE5408 /* FirstPage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076231C084F6000CE5408 /* FirstPage.json */; };
+		6EE0762B1C084F6000CE5408 /* SecondPage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076241C084F6000CE5408 /* SecondPage.json */; };
+		6EE0762D1C084FDD00CE5408 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE0762C1C084FDD00CE5408 /* MapKit.framework */; };
+		6EE0762F1C08544600CE5408 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		EF919A081BEEA0614E583487 /* Pods_DVAManagers_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3842552A6878EDA4F963AC3 /* Pods_DVAManagers_Tests.framework */; };
+		9E1BA92B5AA9336A099AD64F /* libPods-DVAManagers_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +47,7 @@
 		21ECDC79F521DCCDA4F191C7 /* Pods-DVAManagers_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		27F6B94118A794CD9A278804 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2C06DD74E00554AA459EBB15 /* Pods-DVAManagers_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* DVAManagers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = DVAManagers.app; path = DVAManagers_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* DVAManagers_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DVAManagers_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -53,18 +60,26 @@
 		6003F5A5195388D20070C39A /* DVAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVAViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* DVAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DVAViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.xctest; path = DVAManagers_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DVAManagers_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVALocationManagerTests.m; sourceTree = "<group>"; };
+		6EE0761F1C084F6000CE5408 /* vienna-graz-by-car.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vienna-graz-by-car.gpx"; sourceTree = "<group>"; };
+		6EE076201C084F6000CE5408 /* vienna-ring-bikeride.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "vienna-ring-bikeride.gpx"; sourceTree = "<group>"; };
+		6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVANetworkPaginatedResourceTests.m; sourceTree = "<group>"; };
+		6EE076231C084F6000CE5408 /* FirstPage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FirstPage.json; sourceTree = "<group>"; };
+		6EE076241C084F6000CE5408 /* SecondPage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SecondPage.json; sourceTree = "<group>"; };
+		6EE076251C084F6000CE5408 /* TestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsConstants.h; sourceTree = "<group>"; };
+		6EE0762C1C084FDD00CE5408 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVAManagers_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA33D97753CFEFCD2B40979 /* Pods-DVAManagers_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BF195B045CC795E902231089 /* DVAManagers.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DVAManagers.podspec; path = ../DVAManagers.podspec; sourceTree = "<group>"; };
 		D15B243BB983FCC5F0D46720 /* Pods-DVAManagers_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E3842552A6878EDA4F963AC3 /* Pods_DVAManagers_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DVAManagers_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE41C7A223EFB3DA50A1722E /* Pods_DVAManagers_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DVAManagers_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVAManagers_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +89,9 @@
 			files = (
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
+				6EE0762D1C084FDD00CE5408 /* MapKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				25580A95101566B1E663ABAC /* Pods_DVAManagers_Example.framework in Frameworks */,
+				9E1BA92B5AA9336A099AD64F /* libPods-DVAManagers_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +102,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				EF919A081BEEA0614E583487 /* Pods_DVAManagers_Tests.framework in Frameworks */,
+				3DE8FC364D11E42E16FEAB2F /* libPods-DVAManagers_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +124,8 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* DVAManagers.app */,
-				6003F5AE195388D20070C39A /* Tests.xctest */,
+				6003F58A195388D20070C39A /* DVAManagers_Example.app */,
+				6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,12 +133,13 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EE0762C1C084FDD00CE5408 /* MapKit.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				EE41C7A223EFB3DA50A1722E /* Pods_DVAManagers_Example.framework */,
-				E3842552A6878EDA4F963AC3 /* Pods_DVAManagers_Tests.framework */,
+				A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */,
+				EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +154,7 @@
 				6003F5A6195388D20070C39A /* DVAViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */,
 			);
 			name = "Example for DVAManagers";
 			path = DVAManagers;
@@ -156,7 +174,9 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				6EE076251C084F6000CE5408 /* TestsConstants.h */,
+				6EE0761C1C084F6000CE5408 /* locationManagerTests */,
+				6EE076211C084F6000CE5408 /* paginatedResourceTests */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -180,6 +200,34 @@
 				27F6B94118A794CD9A278804 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6EE0761C1C084F6000CE5408 /* locationManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */,
+				6EE0761E1C084F6000CE5408 /* routes */,
+			);
+			path = locationManagerTests;
+			sourceTree = "<group>";
+		};
+		6EE0761E1C084F6000CE5408 /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				6EE0761F1C084F6000CE5408 /* vienna-graz-by-car.gpx */,
+				6EE076201C084F6000CE5408 /* vienna-ring-bikeride.gpx */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		6EE076211C084F6000CE5408 /* paginatedResourceTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */,
+				6EE076231C084F6000CE5408 /* FirstPage.json */,
+				6EE076241C084F6000CE5408 /* SecondPage.json */,
+			);
+			path = paginatedResourceTests;
 			sourceTree = "<group>";
 		};
 		E6E12E743242189BA6A42D9E /* Pods */ = {
@@ -213,7 +261,7 @@
 			);
 			name = DVAManagers_Example;
 			productName = DVAManagers;
-			productReference = 6003F58A195388D20070C39A /* DVAManagers.app */;
+			productReference = 6003F58A195388D20070C39A /* DVAManagers_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* DVAManagers_Tests */ = {
@@ -234,7 +282,7 @@
 			);
 			name = DVAManagers_Tests;
 			productName = DVAManagersTests;
-			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -244,9 +292,16 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DVA;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Pablo Romeu";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -286,7 +341,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EE0762F1C08544600CE5408 /* LaunchScreen.storyboard in Resources */,
+				6EE076271C084F6000CE5408 /* vienna-graz-by-car.gpx in Resources */,
+				6EE076281C084F6000CE5408 /* vienna-ring-bikeride.gpx in Resources */,
+				6EE0762B1C084F6000CE5408 /* SecondPage.json in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				6EE0762A1C084F6000CE5408 /* FirstPage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +460,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */,
+				6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +513,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -466,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,7 +561,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -511,11 +573,12 @@
 			baseConfigurationReference = 21ECDC79F521DCCDA4F191C7 /* Pods-DVAManagers_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DVAManagers/DVAManagers-Prefix.pch";
 				INFOPLIST_FILE = "DVAManagers/DVAManagers-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -526,11 +589,12 @@
 			baseConfigurationReference = BDA33D97753CFEFCD2B40979 /* Pods-DVAManagers_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DVAManagers/DVAManagers-Prefix.pch";
 				INFOPLIST_FILE = "DVAManagers/DVAManagers-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -553,6 +617,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DVAManagers_Example.app/DVAManagers_Example";
 				WRAPPER_EXTENSION = xctest;
@@ -572,6 +637,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DVAManagers_Example.app/DVAManagers_Example";
 				WRAPPER_EXTENSION = xctest;

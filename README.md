@@ -1,29 +1,28 @@
 # DVAManagers
 
-[![CI Status](http://img.shields.io/travis/Pablo Romeu/DVAManagers.svg?style=flat)](https://travis-ci.org/Pablo Romeu/DVAManagers)
-[![Version](https://img.shields.io/cocoapods/v/DVAManagers.svg?style=flat)](http://cocoapods.org/pods/DVAManagers)
-[![License](https://img.shields.io/cocoapods/l/DVAManagers.svg?style=flat)](http://cocoapods.org/pods/DVAManagers)
-[![Platform](https://img.shields.io/cocoapods/p/DVAManagers.svg?style=flat)](http://cocoapods.org/pods/DVAManagers)
-
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
 
+UIKit. 
+
 ## Installation
 
-DVAManagers is available through [CocoaPods](http://cocoapods.org). To install
+DVAManagers is available through [DVAPods](https://bitbucket.org/DVALibs/DVAManagers). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
+source 'https://bitbucket.org/DVALibs/DVAPods/dvapods.git'
+
 pod "DVAManagers"
 ```
 
 ## Author
 
-Pablo Romeu, pablo.romeu@develapps.com
+Pablo Romeu, [pablo.romeu@develapps.es](mailto://pablo.romeu@develapps.es)
 
 ## License
 
-DVAManagers is available under the MIT license. See the LICENSE file for more info.
+DVAPopupViewController is available under the MIT license. See the LICENSE file for more info.
