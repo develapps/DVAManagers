@@ -12,13 +12,13 @@ static NSString *const kDVAPhotoPickerManagerErrorDomain   = @"kDVAPhotoPickerMa
 
 @implementation NSError (DVAPhotoPickerManager)
 
-+(NSError*)dva_locationErrorWithType:(DVAPhotoPickerManagerError)errorType{
-    return [NSError dva_errorWithType:errorType andData:nil];
++(NSError*)dva_photoErrorWithType:(DVAPhotoPickerManagerError)errorType{
+    return [NSError dva_photoErrorWithType:errorType andData:nil];
 }
 
 
-+(NSError*)dva_errorWithType:(DVAPhotoPickerManagerError)errorType
-                     andData:(NSDictionary*)userData{
++(NSError*)dva_photoErrorWithType:(DVAPhotoPickerManagerError)errorType
+                          andData:(NSDictionary *)userData{
     return [NSError errorWithDomain:kDVAPhotoPickerManagerErrorDomain code:errorType userInfo:userData];
 }
 @end

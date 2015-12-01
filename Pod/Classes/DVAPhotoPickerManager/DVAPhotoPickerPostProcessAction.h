@@ -10,4 +10,6 @@
 
 @protocol DVAPhotoPickerPostProcessAction <NSObject>
 -(UIImage*)dva_processPhoto:(UIImage*)photo;
+@property (nonatomic) BOOL debug;
+
 @end

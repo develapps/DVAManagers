@@ -23,9 +23,9 @@
     if (self.compression ==0) {
         return photo;
     }
-    if (_debug) NSLog(@"Starting resize");
+    if (_debug) NSLog(@"Starting compression of image %lu",(unsigned long)[UIImageJPEGRepresentation(photo,1.0) length]);
     NSData * imgData = UIImageJPEGRepresentation(photo,self.compression);
-    if (_debug) NSLog(@"New Size: %lu",(unsigned long)[imgData length]);
+    if (_debug) NSLog(@"Finished compression. New size: %lu",(unsigned long)[imgData length]);
     return [UIImage imageWithData:imgData];
     
 }

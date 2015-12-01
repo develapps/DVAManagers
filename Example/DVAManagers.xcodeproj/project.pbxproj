@@ -20,6 +20,7 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
+		6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */; };
 		6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */; };
 		6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */; };
 		6EE0762A1C084F6000CE5408 /* FirstPage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076231C084F6000CE5408 /* FirstPage.json */; };
@@ -65,6 +66,8 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVAPhotoPickerTableViewController.h; sourceTree = "<group>"; };
+		6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVAPhotoPickerTableViewController.m; sourceTree = "<group>"; };
 		6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVALocationManagerTests.m; sourceTree = "<group>"; };
 		6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVANetworkPaginatedResourceTests.m; sourceTree = "<group>"; };
 		6EE076231C084F6000CE5408 /* FirstPage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FirstPage.json; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 				6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */,
+				6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */,
+				6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */,
 			);
 			name = "Example for DVAManagers";
 			path = DVAManagers;
@@ -452,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* DVAAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* DVAViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

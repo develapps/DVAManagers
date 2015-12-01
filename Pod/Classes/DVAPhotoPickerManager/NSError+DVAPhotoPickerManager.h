@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 static NSString *const kDVAPhotoPickerManagerErrorDomain;
+static NSString *const kDVAPhotoPickerManagerErrorPostProcess;
 
 typedef enum : NSUInteger {
     DVALocationManagerErrorGeneral                                      = 0,
     DVALocationManagerErrorCancelled                                    = 1,
-    
+    DVALocationManagerErrorPostProcessFailed                            = 2,
+
 } DVAPhotoPickerManagerError;
 
 

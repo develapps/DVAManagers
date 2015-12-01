@@ -28,6 +28,7 @@ PODS:
   - Bolts/Tasks (1.5.0)
   - DVACache (1.1.0):
     - DVACategories/NSString (~> 1.4)
+  - DVACategories/NSArray (1.7.0)
   - DVACategories/NSAttributedString (1.7.0)
   - DVACategories/NSString (1.7.0):
     - DVACategories/NSAttributedString
@@ -50,6 +51,20 @@ PODS:
   - DVANetworkTestStubs (1.0.0):
     - AFNetworking (~> 2.6)
     - OHHTTPStubs (~> 4.6)
+  - DVAPopupViewController (1.0.0):
+    - DVAPopupViewController/Buttons (= 1.0.0)
+    - DVAPopupViewController/Categories (= 1.0.0)
+    - DVAPopupViewController/viewConfigurator (= 1.0.0)
+    - DVAPopupViewController/viewController (= 1.0.0)
+  - DVAPopupViewController/Buttons (1.0.0)
+  - DVAPopupViewController/Categories (1.0.0):
+    - DVACategories/NSArray (~> 1.6)
+    - DVAPopupViewController/Buttons
+    - DVAPopupViewController/viewConfigurator
+    - DVAPopupViewController/viewController
+  - DVAPopupViewController/viewConfigurator (1.0.0)
+  - DVAPopupViewController/viewController (1.0.0):
+    - DVAPopupViewController/viewConfigurator
   - FBSDKCoreKit (4.8.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.8.0)
@@ -80,6 +95,7 @@ PODS:
 DEPENDENCIES:
   - DVAManagers (from `../`)
   - DVANetworkTestStubs (~> 1.0.0)
+  - DVAPopupViewController (~> 1.0.0)
 
 EXTERNAL SOURCES:
   DVAManagers:
@@ -92,6 +108,7 @@ SPEC CHECKSUMS:
   DVACategories: c5ba01a73ba1904d815406210795c3a79a898b5f
   DVAManagers: 70700b9356ac2c1dc1f45b49d1edab9d9bebe9ea
   DVANetworkTestStubs: bacd5c40b148975fc2bdf2d1cfb90a63f015b9fe
+  DVAPopupViewController: c8a35a0b5779b8b9ebe29823a0b9431484a4f5a7
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
   FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
   FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b

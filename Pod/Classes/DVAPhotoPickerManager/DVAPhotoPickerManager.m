@@ -9,8 +9,8 @@
 #import "DVAPhotoPickerManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <DVACategories/NSString+DVALocalized.h>
+#import "DVAPhotoPickerPostProcessAction.h"
 
-static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 @interface DVAPhotoPickerManager() <UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
 
@@ -35,14 +35,28 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     return self;
 }
 
-+(void)dva_presentPhotoPickerOnViewController:(UIViewController *)controller
++(instancetype)dva_showPhotoPickerOnViewController:(UIViewController *)controller
                                              withType:(DVAPhotoPickerManagerSourceType)type
                                   withCompletionBlock:(photoPickerCompletion)completion{
+    if (![UIImagePickerController isSourceTypeAvailable:type==DVAPhotoPickerManagerSourceTypeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary]) {
+        return nil;
+    }
     DVAPhotoPickerManager*manager = [[DVAPhotoPickerManager alloc] initWithViewController:controller andCompletionBlock:completion];
-    manager.sourceType = type;
-    manager.imagePicker = [manager createImagePickerController];
-    [controller presentViewController:manager.imagePicker animated:YES completion:nil];
+    [manager dva_presentPhotoPickerOnViewController:controller withType:type];
+    return manager;
 }
+
+-(void)dva_presentPhotoPickerOnViewController:(UIViewController *)controller
+                                     withType:(DVAPhotoPickerManagerSourceType)type{
+    if (![UIImagePickerController isSourceTypeAvailable:type==DVAPhotoPickerManagerSourceTypeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary]) {
+        return;
+    }
+    self.sourceType = type;
+    self.imagePicker = [self createImagePickerController];
+    [controller presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+
 
 #pragma mark - Main methods
 
@@ -51,34 +65,36 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     NSAssert(self.viewController, @"No view controller configured");
     UIAlertController * view=   [UIAlertController
                                  alertControllerWithTitle:nil
-                                 message:[@"select_choice" dva_localizedString]
+                                 message:[@"select_choice" dva_localizedStringForTable:@"PhotoPicker"
+                                                                              inBundle:[NSBundle bundleForClass:[self class]]]
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* takePhoto = [UIAlertAction
-                                actionWithTitle:[@"take_photo"  dva_localizedString]
+                                actionWithTitle:[@"take_photo"  dva_localizedStringForTable:@"PhotoPicker"
+                                                                                   inBundle:[NSBundle bundleForClass:[self class]]]
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action)
                                 {
-                                    [DVAPhotoPickerManager dva_presentPhotoPickerOnViewController:self.viewController
-                                                                                         withType:DVAPhotoPickerManagerSourceTypeCamera
-                                                                              withCompletionBlock:self.completionBlock];
+                                    [self dva_presentPhotoPickerOnViewController:self.viewController
+                                                                                         withType:DVAPhotoPickerManagerSourceTypeCamera];
                                     
                                 }];
     
     
     UIAlertAction* gallery = [UIAlertAction
-                              actionWithTitle:[@"gallery_action" dva_localizedString]
+                              actionWithTitle:[@"gallery_action" dva_localizedStringForTable:@"PhotoPicker"
+                                                                                    inBundle:[NSBundle bundleForClass:[self class]]]
                               style:UIAlertActionStyleDefault
                               handler:^(UIAlertAction * action)
                               {
-                                  [DVAPhotoPickerManager dva_presentPhotoPickerOnViewController:self.viewController
-                                                                                       withType:DVAPhotoPickerManagerSourceTypePhotoLibrary
-                                                                            withCompletionBlock:self.completionBlock];
+                                  [self dva_presentPhotoPickerOnViewController:self.viewController
+                                                                                       withType:DVAPhotoPickerManagerSourceTypePhotoLibrary];
                                   
                               }];
     
     UIAlertAction* cancel = [UIAlertAction
-                             actionWithTitle:[@"cancel_button" dva_localizedString]
+                             actionWithTitle:[@"cancel_button" dva_localizedStringForTable:@"PhotoPicker"
+                                                                                  inBundle:[NSBundle bundleForClass:[self class]]]
                              style:UIAlertActionStyleCancel
                              handler:^(UIAlertAction * action)
                              {
@@ -102,48 +118,27 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
     self.imagePicker.sourceType = self.sourceType==DVAPhotoPickerManagerSourceTypeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
+
+    // This might be other media types
     self.imagePicker.mediaTypes = [NSArray arrayWithObjects:
                                    (NSString *) kUTTypeImage,
                                    nil];
     self.imagePicker.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    
-    self.imagePicker.allowsEditing          = self.dva_allowsEditing;
-    self.imagePicker.showsCameraControls    = self.dva_showsControlls;
+
+    if (self.sourceType==DVAPhotoPickerManagerSourceTypeCamera) {
+        self.imagePicker.allowsEditing          = self.dva_allowsEditing;
+        self.imagePicker.showsCameraControls    = self.dva_showsControlls;
+    }
     return self.imagePicker;
 }
-
-#pragma mark - PostProcessing options
-
-UIImage* rotate(UIImage* src, UIImageOrientation orientation)
-{
-    UIGraphicsBeginImageContext(src.size);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    if (orientation == UIImageOrientationRight) {
-        CGContextRotateCTM (context, radians(90));
-    } else if (orientation == UIImageOrientationLeft) {
-        CGContextRotateCTM (context, radians(-90));
-    } else if (orientation == UIImageOrientationDown) {
-        // NOTHING
-    } else if (orientation == UIImageOrientationUp) {
-        CGContextRotateCTM (context, radians(90));
-    }
-    
-    [src drawAtPoint:CGPointMake(0, 0)];
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 
 
 #pragma mark - UIImagePickerController delegate methods
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    if (self.debug) NSLog(@"-- %s -- \n Picker did end taking media %@",__PRETTY_FUNCTION__,info);
     NSString * mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    UIImage *theImage;
+    UIImage *theFinalImage;
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage * image;
@@ -152,48 +147,38 @@ UIImage* rotate(UIImage* src, UIImageOrientation orientation)
         if (!image) {
             image = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
-        
-#warning transformations
-        
-        //        if (image.imageOrientation != UIImageOrientationUp) {
-        //            image = [image fixOrientation];
-        //        }
-        //
-        //        //__ Fix orientation in the image (only in camera)
-        //        if (self.usingCamera) {
-        //            image = [image fixOrientation];
-        //        }
-        
-        //__ Reduce image to screen size
-        //        CGSize screenSize=[[UIScreen mainScreen] bounds].size;
-        //        CGSize reducedSize;
-        //        if (image.size.width>image.size.height) {
-        //            reducedSize=CGSizeMake(screenSize.width, screenSize.width*image.size.height/image.size.width);
-        //        }
-        //        else{
-        //            reducedSize=CGSizeMake(screenSize.height*image.size.width/image.size.height, screenSize.height);
-        //        }
-        //        image = [UIImage imageWithImage:image scaledToSize:reducedSize];
-        
-        
-        //----------------------//
-        //__ Transform the png into jpg image
-        theImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 1.0)];
-        if (self.dva_savesToPhotoAlbum) UIImageWriteToSavedPhotosAlbum(theImage, nil, nil, nil);
+
+        UIImage *processedImage = image;
+        for (id<DVAPhotoPickerPostProcessAction>postProcessor in self.dva_postProcessActions) {
+            if (self.debug) NSLog(@"-- %s -- \n Picker processing media with processor %@",__PRETTY_FUNCTION__,postProcessor);
+            [postProcessor setDebug:self.debug];
+            processedImage = [postProcessor dva_processPhoto:processedImage];
+            if (!processedImage)
+            {
+                [picker dismissViewControllerAnimated:YES completion:^{
+                    if (self.completionBlock) self.completionBlock(nil,[NSError dva_photoErrorWithType:DVALocationManagerErrorPostProcessFailed andData:@{kDVAPhotoPickerManagerErrorPostProcess:postProcessor}]);
+                }];
+                return;
+            }
+            
+        }
+
+        theFinalImage = [UIImage imageWithData:UIImageJPEGRepresentation(processedImage, 1.0)];
+        if (self.dva_savesToPhotoAlbum) UIImageWriteToSavedPhotosAlbum(theFinalImage, nil, nil, nil);
     }
     
     [picker dismissViewControllerAnimated:YES completion:^{
-        if (self.completionBlock) self.completionBlock(theImage,nil);
+        if (self.completionBlock) self.completionBlock(theFinalImage,nil);
     }];
 }
 
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    if (self.debug) NSLog(@"-- %s -- \n Picker did cancel taking media %@",__PRETTY_FUNCTION__,picker);
     [picker dismissViewControllerAnimated:YES completion:^{
         if (self.completionBlock)  self.completionBlock(nil,[NSError dva_photoErrorWithType:DVALocationManagerErrorCancelled]);
     }];
 }
-
 
 
 @end

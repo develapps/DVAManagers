@@ -5,10 +5,12 @@ source 'https://bitbucket.org/DVALibs/dvapods.git'
 
 target 'DVAManagers_Example', :exclusive => true do
   pod "DVAManagers", :path => "../"
+  pod "DVAPopupViewController" , '~> 1.0.0'
 end
 
 target 'DVAManagers_Tests', :exclusive => true do
   pod "DVAManagers", :path => "../"
+  pod "DVAPopupViewController" , '~> 1.0.0'
   pod "DVANetworkTestStubs" , '~> 1.0.0'
 end
 
