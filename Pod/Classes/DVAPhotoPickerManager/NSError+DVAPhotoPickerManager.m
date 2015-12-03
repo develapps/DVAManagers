@@ -8,7 +8,8 @@
 
 #import "NSError+DVAPhotoPickerManager.h"
 
-static NSString *const kDVAPhotoPickerManagerErrorDomain   = @"kDVAPhotoPickerManagerErrorDomain";
+static NSString *const kDVAPhotoPickerManagerErrorDomain        = @"kDVAPhotoPickerManagerErrorDomain";
+static NSString *const kDVAPhotoPickerManagerErrorPostProcess   = @"kDVAPhotoPickerManagerErrorPostProcess";
 
 @implementation NSError (DVAPhotoPickerManager)
 

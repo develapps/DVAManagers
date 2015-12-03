@@ -193,6 +193,8 @@
 		6D70CEB82231FDDC752112C1FC9874E6 /* FBSDKBridgeAPIProtocolNativeV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 420E1BE913613C8CFB959A1378209630 /* FBSDKBridgeAPIProtocolNativeV1.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6D74E1A992667BB9297FFADFD3436370 /* FBSDKLoginManagerLoginResult.h in Headers */ = {isa = PBXBuildFile; fileRef = B9951D86F9C29BF26E5621662FD12B5D /* FBSDKLoginManagerLoginResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E5887A9FDA1EDEB4BDE0ECDDA39C0CF /* FBSDKCheckmarkIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BC7589FFAD245400CC4154F645E082 /* FBSDKCheckmarkIcon.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6EB61BC21C0DC8CF00150AA8 /* NSError+DVAFacebookManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EB61BC01C0DC8CF00150AA8 /* NSError+DVAFacebookManager.h */; };
+		6EB61BC31C0DC8CF00150AA8 /* NSError+DVAFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB61BC11C0DC8CF00150AA8 /* NSError+DVAFacebookManager.m */; };
 		7145D422DE7641995C8978BDD123106A /* FBSDKBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0CA801EC7185163CD023826C81E48F /* FBSDKBase64.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7171DEAFC5A2F780E670B8395EF8F07B /* BFDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB5E7A724BD60F1B8BC094FAA8E9F38 /* BFDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71913BB86B59052B4C8E916BD697B7D6 /* FBSDKVideoUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BCCCD474E26A090D7B04F80C67C9D3 /* FBSDKVideoUploader.m */; };
@@ -925,6 +927,9 @@
 		6DE69B421448659B255EDBD217310EA0 /* FBSDKTestUsersManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKTestUsersManager.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKTestUsersManager.h; sourceTree = "<group>"; };
 		6E729D4FC953E13AFAE54380A8A27F53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		6E808E700DA2FD77DD730E85649652BE /* FBSDKLikeActionController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKLikeActionController.m; path = FBSDKShareKit/FBSDKShareKit/Internal/FBSDKLikeActionController.m; sourceTree = "<group>"; };
+		6EB61BBD1C0DC6C200150AA8 /* DVAFacebookManagerConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVAFacebookManagerConstants.h; sourceTree = "<group>"; };
+		6EB61BC01C0DC8CF00150AA8 /* NSError+DVAFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+DVAFacebookManager.h"; sourceTree = "<group>"; };
+		6EB61BC11C0DC8CF00150AA8 /* NSError+DVAFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+DVAFacebookManager.m"; sourceTree = "<group>"; };
 		6FBDF92A62C7C491786E0C167B30F6C4 /* FBSDKLikeControl+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBSDKLikeControl+Internal.h"; path = "FBSDKShareKit/FBSDKShareKit/Internal/FBSDKLikeControl+Internal.h"; sourceTree = "<group>"; };
 		707CBE12E7D572DC9BECE143D5D5089C /* FBSDKPaymentObserver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKPaymentObserver.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKPaymentObserver.m; sourceTree = "<group>"; };
 		7175DD8C78111C18363E98B1B67F3021 /* NSArray+FP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+FP.h"; path = "Pod/Classes/NSArray/NSArray+FP.h"; sourceTree = "<group>"; };
@@ -2351,6 +2356,9 @@
 			children = (
 				B097659E884826B927EB41C9DE8145DB /* DVAFacebookManager.h */,
 				9B0FEA6CD8DF5F8859FE657194C2338E /* DVAFacebookManager.m */,
+				6EB61BBD1C0DC6C200150AA8 /* DVAFacebookManagerConstants.h */,
+				6EB61BC01C0DC8CF00150AA8 /* NSError+DVAFacebookManager.h */,
+				6EB61BC11C0DC8CF00150AA8 /* NSError+DVAFacebookManager.m */,
 			);
 			path = DVAFacebookManager;
 			sourceTree = "<group>";
@@ -2555,6 +2563,7 @@
 				741A0B4EBF037DC7CDF85EB0A4456836 /* DVAPhotoPickerPostProcessAction.h in Headers */,
 				C25FC3441CD2C81BA3CF8B5C622AB702 /* DVAPhotoPickerPostProcessCompress.h in Headers */,
 				5523329B19A4D728B7592435EFAACB7E /* DVAPhotoPickerPostProcessRotate.h in Headers */,
+				6EB61BC21C0DC8CF00150AA8 /* NSError+DVAFacebookManager.h in Headers */,
 				B619B069C283F0A07964442588733939 /* DVAPhotoPickerPostProcessScale.h in Headers */,
 				A0A03071F7AFD1653C03AA7EA272B8D8 /* NSError+DVALocationManager.h in Headers */,
 				F27F5A0417E6558D6C5FC6D7AD5766E0 /* NSError+DVAPhotoPickerManager.h in Headers */,
@@ -3107,6 +3116,7 @@
 				48519903772FFBD76906BD811D9DAB19 /* DVAPhotoPickerManager.m in Sources */,
 				9D0E9C4B948983EE5193DD355D9D4D1A /* DVAPhotoPickerPostProcessCompress.m in Sources */,
 				6018992E5ACB2EB7CA91FA02CCF0A4B7 /* DVAPhotoPickerPostProcessRotate.m in Sources */,
+				6EB61BC31C0DC8CF00150AA8 /* NSError+DVAFacebookManager.m in Sources */,
 				3BBA646636121F0524815B32A0C65A8C /* DVAPhotoPickerPostProcessScale.m in Sources */,
 				2153623541B9473F3A7E3DC597A1AA03 /* NSError+DVALocationManager.m in Sources */,
 				DFA5155AB116FFA8426726C795A7D621 /* NSError+DVAPhotoPickerManager.m in Sources */,
