@@ -16,7 +16,6 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
 
 #import <DVACache/DVACache.h>
 #import "DVAFacebookManagerConstants.h"
@@ -32,7 +31,7 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  
  @since 1.0.0
  */
-@interface DVAFacebookManager : NSObject <FBSDKSharingDelegate>
+@interface DVAFacebookManager : NSObject 
 
 /*!
  @author Pablo Romeu, 15-12-01 13:12:29

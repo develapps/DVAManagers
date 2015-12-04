@@ -3597,6 +3597,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8BD191CCCF0DFBD43604EFC7A99C0243 /* FBSDKShareKit.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FBSDKShareKit/FBSDKShareKit-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3651,6 +3653,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4DB106F27F228A8226D5D231CBCD911 /* DVAManagers.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/DVAManagers/DVAManagers-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3847,6 +3851,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8BD191CCCF0DFBD43604EFC7A99C0243 /* FBSDKShareKit.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FBSDKShareKit/FBSDKShareKit-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3991,6 +3997,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4DB106F27F228A8226D5D231CBCD911 /* DVAManagers.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/DVAManagers/DVAManagers-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
