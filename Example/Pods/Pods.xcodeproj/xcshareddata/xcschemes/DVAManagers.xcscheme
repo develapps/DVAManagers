@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3758ACC3D91ADD745E66D6A4'
+               BlueprintIdentifier = 'F59F121C7D6C331E01B4BFAB'
                BlueprintName = 'DVAManagers'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libDVAManagers.a'>

@@ -214,7 +214,7 @@
 
 - (void)dva_pictureForUserId:(NSString*)userId withCompletion:(DVAFacebookManagerCompletionBlock)completionBlock{
     NSDictionary *params = @{kDVAFBManagerFacebookType      : kDVAFBManagerFacebookAlbum,
-                             kDVAFBManagerFacebookFields    : [@[kDVAFBManagerFacebookData,kDVAFBManagerFacebookAlbum] componentsJoinedByString:@","]}; /* enum{thumbnail,small,album} */
+                             kDVAFBManagerFacebookFields    : [@[kDVAFBManagerFacebookData,kDVAFBManagerFacebookUrl] componentsJoinedByString:@","]}; /* enum{thumbnail,small,album} */
     
     
     if ([self dva_checkPermission:kDVAFBManagerFacebookPhotos]) {
@@ -264,9 +264,12 @@
 - (void)dva_picturesFromProfileAlbumWithCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock {
     [self dva_albumsWithCompletionBlock:^(id userData, NSError *error, BOOL cached) {
         NSString *albumId = nil;
-#warning this might not be ok, check the "data"
+        if (error) {
+            completionBlock(userData,error,cached);
+            return ;
+        }
         
-        for (NSDictionary *album in userData) {
+        for (NSDictionary *album in [userData objectForKey:kDVAFBManagerFacebookData]) {
             if ([album[kDVAFBManagerFacebookName] isEqualToString:kDVAFBManagerFacebookProfilePicturesAlbum]){
                 albumId = album[kDVAFBManagerFacebookObjectId];
             }
@@ -276,7 +279,7 @@
             completionBlock(nil, error,NO);
         }
         
-        [self picturesWithAlbumId:albumId completionBlock:^(id userData, NSError *error, BOOL cached) {
+        [self dva_picturesWithAlbumId:albumId completionBlock:^(id userData, NSError *error, BOOL cached) {
             completionBlock(userData, error,NO);
         }];
     }];

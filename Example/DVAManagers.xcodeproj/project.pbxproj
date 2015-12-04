@@ -20,6 +20,7 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
+		6E5BE6EA1C11B09100711061 /* DVAFacebookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */; };
 		6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */; };
 		6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */; };
 		6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */; };
@@ -66,6 +67,8 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		6E5BE6E81C11B09100711061 /* DVAFacebookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVAFacebookTableViewController.h; sourceTree = "<group>"; };
+		6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVAFacebookTableViewController.m; sourceTree = "<group>"; };
 		6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVAPhotoPickerTableViewController.h; sourceTree = "<group>"; };
 		6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVAPhotoPickerTableViewController.m; sourceTree = "<group>"; };
 		6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVALocationManagerTests.m; sourceTree = "<group>"; };
@@ -155,13 +158,12 @@
 				6003F59C195388D20070C39A /* DVAAppDelegate.h */,
 				6003F59D195388D20070C39A /* DVAAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* DVAViewController.h */,
-				6003F5A6195388D20070C39A /* DVAViewController.m */,
+				6E5BE6E71C11B07600711061 /* photoController */,
+				6E5BE6E61C11B02000711061 /* facebookController */,
+				6E5BE6E51C11B00B00711061 /* locationController */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 				6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */,
-				6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */,
-				6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */,
 			);
 			name = "Example for DVAManagers";
 			path = DVAManagers;
@@ -207,6 +209,33 @@
 				27F6B94118A794CD9A278804 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6E5BE6E51C11B00B00711061 /* locationController */ = {
+			isa = PBXGroup;
+			children = (
+				6003F5A5195388D20070C39A /* DVAViewController.h */,
+				6003F5A6195388D20070C39A /* DVAViewController.m */,
+			);
+			name = locationController;
+			sourceTree = "<group>";
+		};
+		6E5BE6E61C11B02000711061 /* facebookController */ = {
+			isa = PBXGroup;
+			children = (
+				6E5BE6E81C11B09100711061 /* DVAFacebookTableViewController.h */,
+				6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */,
+			);
+			name = facebookController;
+			sourceTree = "<group>";
+		};
+		6E5BE6E71C11B07600711061 /* photoController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */,
+				6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */,
+			);
+			name = photoController;
 			sourceTree = "<group>";
 		};
 		6EE0761C1C084F6000CE5408 /* locationManagerTests */ = {
@@ -457,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5BE6EA1C11B09100711061 /* DVAFacebookTableViewController.m in Sources */,
 				6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* DVAAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* DVAViewController.m in Sources */,

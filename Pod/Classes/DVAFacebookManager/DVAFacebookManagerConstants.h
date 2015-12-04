@@ -37,6 +37,8 @@ static NSString * const kDVAFBManagerFacebookEducationKey                = @"edu
 static NSString * const kDVAFBManagerFacebookEducationSchool             = @"school";
 static NSString * const kDVAFBManagerFacebookEducationSchoolName         = @"name";
 static NSString * const kDVAFBManagerFacebookProviderId                  = @"id";
+static NSString * const kDVAFBManagerFacebookImageTypeNormal             = @"normal";
+
 
 //Permissions Parameters
 
@@ -48,17 +50,17 @@ static NSString * const kDVAFBManagerFacebookPhotos                  = @"user_ph
 static NSString * const kDVAFBManagerFacebookBirthDay                = @"user_birthday";
 static NSString * const kDVAFBManagerFacebookHometown                = @"user_hometown";
 static NSString * const kDVAFBManagerFacebookAboutMe                 = @"user_about_me";
-static NSString * const kDVAFBManagerFacebookImages                      = @"images";
+static NSString * const kDVAFBManagerFacebookImages                     = @"images";
 static NSString * const kDVAFBManagerFacebookImagesSource                      = @"source";
 
 #pragma mark - Graph Paths
 
-static NSString * const kDVAFBManagerFacebookGraphMe                 = @"me";
-static NSString * const kDVAFBManagerFacebookGraphMePicture = @"/%@/picture?redirect=false";
-static NSString * const kDVAFBManagerFacebookGraphMeAlbums =@"me/albums";
-static NSString * const kDVAFBManagerFacebookGraphFriends =@"/me/friends";
+static NSString * const kDVAFBManagerFacebookGraphMe            = @"me";
+static NSString * const kDVAFBManagerFacebookGraphMePicture     = @"%@/picture?redirect=false";
+static NSString * const kDVAFBManagerFacebookGraphMeAlbums      =@"me/albums";
+static NSString * const kDVAFBManagerFacebookGraphFriends       =@"me/friends";
 
-static NSString * const kDVAFBManagerFacebookGraphAlbumPhotos =@"/%@/photos";
+static NSString * const kDVAFBManagerFacebookGraphAlbumPhotos   =@"%@/photos";
 
 
 #pragma mark - Other constants
