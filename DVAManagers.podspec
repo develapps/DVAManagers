@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DVAManagers"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "Common DVAManagers for iOS Apps"
 
   s.description      = <<-DESC
@@ -17,6 +17,11 @@ This pod implements managers for common tasks like:
 - Photo picker
 - Location Manager
 - Facebook Manager
+
+New 1.1.0
+---------
+Added cache types at paginated resource
+
                        DESC
 
   s.homepage         = "https://bitbucket.org/dvalibs/dvamanagers"

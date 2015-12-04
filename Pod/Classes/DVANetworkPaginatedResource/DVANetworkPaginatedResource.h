@@ -10,6 +10,12 @@
 #import <AFNetworking/AFNetworking.h>
 #import <DVACache/DVACache.h>
 
+typedef enum : NSUInteger {
+    DVAPaginatedResponseCacheOrNetwork          = 0, // Cache or Network
+    DVAPaginatedResponseCacheThenNetwork        = 1, // Cache then Network
+    DVAPaginatedResponseNetworkOnly             = 2, // Network only
+} DVAPaginatedResponse;
+
 typedef void(^networkPaginatedResourceHandler)(BOOL fromCache,NSArray *items, NSInteger totalItemsCount, NSError *error);
 
 @interface DVANetworkPaginatedResource : NSObject
@@ -21,7 +27,9 @@ typedef void(^networkPaginatedResourceHandler)(BOOL fromCache,NSArray *items, NS
 @property (readonly, getter=isDownloading)  BOOL            downloading;
 
 @property (nonatomic, copy)                 NSString        *emptyDatasetMessage;
-@property (nonatomic, strong)               DVACache        *cache;
+@property (nonatomic, strong)               DVACache                *cache;
+@property (nonatomic)                       DVAPaginatedResponse    cacheBehaviour;
+
 @property (nonatomic)                       BOOL            debug;
 
 
