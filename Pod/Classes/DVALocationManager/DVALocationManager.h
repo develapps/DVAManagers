@@ -20,7 +20,10 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
 /**
  This class provides a generalized location manager. 
  
+ For GPX track testing: http://www.gpsvisualizer.com/draw/
+ 
  @warning do not forget to include the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription . Info: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/CoreLocation/CoreLocation.html
+ 
  
  @since 1.0.0
  */
@@ -54,14 +57,23 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
 
 @property (nonatomic) BOOL debug;
 
+/*!
+ @author Pablo Romeu, 15-11-27 12:11:57
+ 
+ Returns the last location
+ 
+ @since 1.0.0
+ */
+@property (nonatomic,readonly) CLLocation *dva_lastLocation;
+
 /**
- The location accurancy. Defaults to kCLLocationAccuracyKilometer
+ The location accurancy. Defaults to kCLLocationAccuracyHundredMeters
  
  @since 1.0.0
  */
 @property (nonatomic) CLLocationAccuracy dva_LocationAccurancy;
 /**
- The location minimum distance for continuous location updates. Defaults to 500 (meters)
+ The location minimum distance for continuous location updates. Defaults to kCLDistanceFilterNone (measure in meters)
  
  @since 1.0.0
  */
@@ -80,7 +92,7 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
  
  @since 1.0.0
  */
-@property (nonatomic) CLAuthorizationStatus dva_currentAuthStatus;
+@property (nonatomic,readonly) CLAuthorizationStatus dva_currentAuthStatus;
 
 #pragma mark -
 #pragma mark - basic location methods
@@ -109,17 +121,40 @@ typedef void (^locationDistanceHandler)(CGFloat distance,NSError*error);
 - (void)dva_stopUpdatingLocation;
 
 #pragma mark -
+#pragma mark - significant location changes
+
+/*!
+ @author Pablo Romeu, 15-11-27 12:11:14
+ 
+ Starts monitoring for significant location changes
+ 
+ @param handler a location handler
+ 
+ @since 1.0.0
+ */
+- (void)dva_startRequestingSignificantLocationChanges:(locationHandler)handler;
+/*!
+ @author Pablo Romeu, 15-11-27 12:11:35
+ 
+ Stops requesting significant location changes
+ 
+ @since 1.0.0
+ */
+- (void)dva_stopRequestingSignificantLocationChanges;
+
+
+#pragma mark -
 #pragma mark - Helpers
 
 /*!
  @author Pablo Romeu, 15-11-27 10:11:35
  
- Asks for current location and returns a distance to the provided one
+ Returns distance from the last location to the provided one
  
  @param location the provided location
  @param distance the distance
  
  @since 1.0.0
  */
--(void)dva_currentLocationDistanceTo:(CLLocation*)location completion:(locationDistanceHandler)distance;
+-(CLLocationDistance)dva_currentLocationDistanceTo:(CLLocation*)location;
 @end

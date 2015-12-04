@@ -10,10 +10,8 @@
 
 @interface DVAFacebookManager ()
 
-@property (nonatomic, strong) NSArray * permissions;
-@property (nonatomic, strong) NSArray * minimumPermissions;
-@property (strong, nonatomic) DVAFacebookSuccessBlock sharingBlock;
-@property (nonatomic,strong) DVACache*cache;
+@property (strong, nonatomic)   DVAFacebookManagerSuccessBlock sharingBlock;
+@property (nonatomic,strong)    DVACache*cache;
 @end
 
 @implementation DVAFacebookManager
@@ -37,16 +35,12 @@
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
         
-        _permissions        = @[kDVAFBManagerFacebookEmail,
+        _dva_permissions        = @[kDVAFBManagerFacebookEmail,
                                 kDVAFBManagerFacebookPublicProfile,
-                                kDVAFBManagerFacebookFriends,
-                                kDVAFBManagerFacebookBirthDay,
-                                kDVAFBManagerFacebookPhotos,
-                                kDVAFBManagerFacebookEducation,
-                                kDVAFBManagerFacebookAboutMe];
+                                kDVAFBManagerFacebookFriends];
         
-        _minimumPermissions = @[];//@[kDVAFBManagerFacebookEmail, kDVAFBManagerFacebookPublicProfile, kDVAFBManagerFacebookEmail];
-        _cache = [[DVACache alloc] initWithName:@"DVAFacebook-Cache"];
+        _dva_minimumPermissions = @[];//@[kDVAFBManagerFacebookEmail, kDVAFBManagerFacebookPublicProfile, kDVAFBManagerFacebookEmail];
+        _cache = [[DVACache alloc] initWithName:@"DVAFacebookManager-Cache"];
         [_cache setDefaultEvictionTime:3600];
         [_cache setDefaultPersistance:DVACacheInMemory|DVACacheOnDisk];
     }
@@ -59,246 +53,147 @@
     _cache.debug=debug?DVACacheDebugLow:DVACacheDebugNone;
 }
 
+#pragma mark - Generic methods
+
+-(void)dva_requestWithGraphPath:(NSString *)path
+                  andParameters:(NSDictionary *)parameters
+             andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock{
+    [self dva_requestWithGraphPath:path httpMethod:nil andParameters:parameters andCompletionBlock:completionBlock];
+}
+
+-(void)dva_requestWithGraphPath:(NSString *)path
+                     httpMethod:(NSString *)method
+                  andParameters:(NSDictionary *)parameters
+             andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock{
+
+    if (!method) method = @"GET";
+    if (self.debug) NSLog(@"-- %s -- \n Requesting graph path %@ method %@ with parameters %@",__PRETTY_FUNCTION__,path,method,parameters);
+    
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:path parameters:parameters HTTPMethod:method] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            if (self.debug) NSLog(@"-- %s -- \n ERROR: Request graph path %@ method %@ with parameters %@ failed with error %@",__PRETTY_FUNCTION__,path,method,parameters,error);
+            completionBlock(nil, error,NO);
+        }else{
+            if (self.debug) NSLog(@"-- %s -- \n SUCCESS: Request graph path %@ method %@ with parameters %@: \rRESULT: %@",__PRETTY_FUNCTION__,path,method,parameters,result);
+            completionBlock(result, nil,NO);
+        }
+    }];
+}
+
 #pragma mark - Public Methods
 
-- (void)loginWithCopletionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    
-    [self loginWithFacebook:^(BOOL success, NSError *error) {
-        if (!success) {
-            completionBlock(nil, error);
-        }
-        
-        [self userDataWithCompletionBlock:^(id userData, NSError *error) {
-            completionBlock(userData, error);
-        }];
-    }];
-}
-
-- (void)logout {
-    
+- (void)dva_loginWithCompletionBlock:(DVAFacebookManagerSuccessBlock)completionBlock {
+    if (self.debug) NSLog(@"-- %s -- \n Starting login...",__PRETTY_FUNCTION__);
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logOut];
-}
-
-- (void)extraPermission:(NSString *)extraPermission withCopletionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:@[extraPermission]
+    [login logInWithReadPermissions:self.dva_permissions
                  fromViewController:nil
                             handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                 if (error) {
                                     // Process error
-                                    completionBlock(nil, error);
+                                    if (self.debug) NSLog(@"-- %s -- \nERROR: Login failed %@",__PRETTY_FUNCTION__,error);
+                                    completionBlock(NO, error);
                                 } else if (result.isCancelled) {
                                     // Handle cancellations
-                                    completionBlock(nil, error);
+                                    NSError *newError = [NSError dva_facebookErrorWithType:kDVAFBEErrorOperationCancelled];
+                                    if (self.debug) NSLog(@"-- %s -- \nERROR: Login cancelled %@",__PRETTY_FUNCTION__,newError);
+                                    completionBlock(NO, newError);
                                 } else {
                                     // If you ask for multiple permissions at once, you
                                     // should check if specific permissions missing
-                                    if ([result.grantedPermissions containsObject:extraPermission]) {
-                                        // Do work
-                                        [self userDataWithCompletionBlock:^(id userData, NSError *error) {
-                                            completionBlock(userData, error);
-                                        }];
-                                    }
-                                }
-                            }];
-}
-
-- (BOOL)checkPermission:(NSString *)permission{
-    return ([[FBSDKAccessToken currentAccessToken] hasGranted:permission]);
-}
-
-- (BOOL)userLogged {
-    return [FBSDKAccessToken currentAccessToken];
-}
-
-- (NSString *)accessToken {
-    return [[FBSDKAccessToken currentAccessToken]tokenString];
-}
-
-//Facebook events
-- (void)activateFacebookEvents {
-    [FBSDKAppEvents activateApp];
-}
-
-- (void)activateIntallTraking {
-    [FBSDKAppEvents activateApp];
-}
-
-- (void)friendsWithCompletionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    NSDictionary*parameters = @{@"fields":@"id,name"};
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:kDVAFBManagerFacebookFriends]) {
-        id resultCached=[self.cache objectForKey:@"me/friends"];
-        if (resultCached) {
-            completionBlock(resultCached, nil);
-            return;
-        }
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/friends" parameters:parameters]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             [self.cache setObject:result[@"data"] forKey:@"me/friends"];
-             completionBlock(result[@"data"], error);
-         }];
-    }
-}
-
-- (void)pictureForUserId:(NSString*)userId withCompletion:(DVAFacebookCompletionBlock)completionBlock{
-    NSDictionary *params = @{@"type": @"album",
-                             @"fields":@"data,url"}; /* enum{thumbnail,small,album} */
-    
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:kDVAFBManagerFacebookPhotos]) {
-        [[[FBSDKGraphRequest alloc]
-          initWithGraphPath:[NSString stringWithFormat:@"/%@/picture?redirect=false",userId]
-          parameters:params
-          HTTPMethod:@"GET"] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                          id result,
-                                                          NSError *error) {
-            NSDictionary*aResult = result;
-            if (self.debug) NSLog(@"%s %@",__PRETTY_FUNCTION__,result);
-            completionBlock ([aResult[@"data"][@"url"] copy], error);
-        }];
-    }
-    else {
-        completionBlock(nil,nil);
-    }
-}
-
-- (void)picturesFromProfileAlbumWithCompletionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    [self albumsWithCompletionBlock:^(id userData, NSError *error) {
-        NSString *albumId = nil;
-        for (NSDictionary *album in userData) {
-            if ([album[@"name"] isEqualToString:@"Profile Pictures"]){
-                albumId = album[@"id"];
-            }
-        }
-        
-        if (!albumId) {
-            completionBlock(nil, error);
-        }
-        
-        [self picturesWithAlbumId:albumId completionBlock:^(id userData, NSError *error) {
-            completionBlock(userData, error);
-        }];
-    }];
-}
-
-- (void)albumsWithCompletionBlock:(DVAFacebookCompletionBlock)completionBlock{
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:kDVAFBManagerFacebookPhotos]) {
-        NSDictionary *params = @{@"fields":@"data,name,id"};
-        id resultCached=[self.cache objectForKey:@"me/albums"];
-        if (resultCached) {
-            completionBlock(resultCached, nil);
-            return;
-        }
-        
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/albums" parameters:params]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             NSArray *albumsArray = (NSArray *)result[@"data"];
-             completionBlock(albumsArray,error);
-         }];
-    }
-    else{
-        completionBlock(nil,nil);
-    }
-}
-
-- (void)picturesWithAlbumId:(NSString *)albumId completionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    
-    NSDictionary *params = @{@"type": @"album",
-                             @"fields":@"data,images,source"}; /* enum{thumbnail,small,album} */
-    NSString *graphPath  = [NSString stringWithFormat:@"/%@/photos",albumId];
-    NSMutableArray *pictures = [NSMutableArray new];
-    
-    // make the API call
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                  initWithGraphPath: graphPath
-                                  parameters:params
-                                  HTTPMethod:@"GET"];
-    
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,id result,NSError *error) {
-        
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result
-                                                           options:NSJSONWritingPrettyPrinted
-                                                             error:&error];
-        
-        NSString *str = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        if (self.debug) NSLog(@"%s %@",__PRETTY_FUNCTION__,str);
-        
-        for (NSDictionary *dictionary in (NSArray *)result[@"data"]) {
-            NSDictionary*firstImage=[(NSArray*)[dictionary objectForKey:@"images"] firstObject];
-            [pictures addObject:firstImage[@"source"]];
-        }
-        
-        completionBlock ([pictures copy], error);
-    }];
-}
-
-- (void)fillProfilePicture:(FBSDKProfilePictureView *)pictureView fromProfileId:(NSString *)profileId {
-    [pictureView setProfileID:profileId];
-    [pictureView setPictureMode:FBSDKProfilePictureModeSquare];
-}
-
-#pragma mark - Private methods
-
-- (void)loginWithFacebook:(DVAFacebookSuccessBlock)successBlock  {
-    
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:self.permissions
-                 fromViewController:nil
-                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                if (error) {
-                                    // Process error
-                                    successBlock(NO, error);
-                                } else if (result.isCancelled) {
-                                    // Handle cancellations
-                                    successBlock(NO, error);
-                                } else {
-                                    // If you ask for multiple permissions at once, you
-                                    // should check if specific permissions missing
-                                    for (NSString *permission in self.minimumPermissions) {
+                                    for (NSString *permission in self.dva_minimumPermissions) {
                                         if (![result.grantedPermissions containsObject:permission]) {
-                                            successBlock(NO, error);
+                                            NSError *newError = [NSError dva_facebookErrorWithType:kDVAFBEMinimumPermissionsNotAcquired
+                                                                                           andData:@{kDVAFBKeyOriginalError:error?:@{},
+                                                                                                     kDVAFBKeyFailingPermission:permission,}];
+                                            
+                                            if (self.debug) NSLog(@"-- %s -- \nERROR: Login failed %@, minimum permission %@ not acquired",__PRETTY_FUNCTION__,newError,permission);
+                                            completionBlock(NO, newError);
                                             return;
                                         }
                                     }
                                     
+                                    if (self.debug) NSLog(@"-- %s -- \n Login succeeded",__PRETTY_FUNCTION__);
                                     // Do work
-                                    successBlock(YES, nil);
+                                    completionBlock(YES, nil);
                                 }
                             }];
 }
 
-- (void)userDataWithCompletionBlock:(DVAFacebookCompletionBlock)completionBlock {
-    
-    //if ([FBSDKAccessToken currentAccessToken]) {
-    
-    NSArray *parametersArray = @[kDVAFBManagerFacebookFirstName,kDVAFBManagerFacebookLastName,kDVAFBManagerFacebookAbout,kDVAFBManagerFacebookEmail,kDVAFBManagerFacebookGender,kDVAFBManagerFacebookHometownKey,kDVAFBManagerFacebookEducationKey,kDVAFBManagerFacebookProviderId,kDVAFBManagerFacebookBirthDayKey];
-    
-    
+-(void)dva_userInfo:(NSArray *)info withCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock{
+    NSAssert(info, @"ERROR: You should pass the required fields");
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:[parametersArray componentsJoinedByString:@","] forKey:@"fields"];
-    
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-         if (error) {
-             completionBlock(nil, error);
-         }else{
-             completionBlock(result, nil);
-         }
-     }];
-    //}
+    [parameters setValue:[info componentsJoinedByString:@","] forKey:kDVAFBManagerFacebookFields];
+    if (self.debug) NSLog(@"-- %s -- \n Requesting user info for %@",__PRETTY_FUNCTION__,info);
+    [self dva_requestWithGraphPath:kDVAFBManagerFacebookGraphMe andParameters:parameters andCompletionBlock:completionBlock];
 }
 
-#pragma mark -
-#pragma mark - Sharing Actions
+- (void)dva_logout {
+    if (self.debug) NSLog(@"-- %s -- \n Login out",__PRETTY_FUNCTION__);
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
+}
 
-- (void)shareContentUrl:(NSURL *)contentURL
-                  title:(NSString *)title
-            description:(NSString *)description
-               imageURL:(NSURL *)imageURL
-             controller:(UIViewController *)controller
-             completion:(DVAFacebookSuccessBlock)completionBlock {
-    
+- (void)dva_askForExtraPermissions:(NSArray *)extraPermissions
+               withCompletionBlock:(DVAFacebookManagerSuccessBlock)completionBlock{
+    NSAssert(extraPermissions, @"-- %s -- \n extra permissions cannot be nil",__PRETTY_FUNCTION__);
+    if (self.debug) NSLog(@"-- %s -- \n Asking for extra permissions %@",__PRETTY_FUNCTION__, extraPermissions);
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:extraPermissions
+                 fromViewController:nil
+                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                if (error) {
+                                    // Process error
+                                    if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions failed %@",__PRETTY_FUNCTION__, error);
+                                    completionBlock(NO, error);
+                                } else if (result.isCancelled) {
+                                    // Handle cancellations
+                                    
+                                    NSError* newError = [NSError dva_facebookErrorWithType:kDVAFBEErrorOperationCancelled];
+                                    if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions cancelled %@",__PRETTY_FUNCTION__, newError);
+
+                                    completionBlock(NO, newError);
+                                } else {
+                                    // If you ask for multiple permissions at once, you
+                                    // should check if specific permissions missing
+                                    NSMutableSet *required = [NSMutableSet setWithArray:extraPermissions];
+                                    [required minusSet:result.grantedPermissions];
+                                    if ([required count]==0) { // All permissions are granted
+                                        if (self.debug) NSLog(@"-- %s -- \n Extra permissions granted %@",__PRETTY_FUNCTION__, extraPermissions);
+                                        completionBlock(YES,nil);
+                                    }
+                                    else{
+                                        if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions not granted %@",__PRETTY_FUNCTION__,required);
+                                        completionBlock(NO,[NSError dva_facebookErrorWithType:kDVAFBEMinimumPermissionsNotAcquired
+                                                                                      andData:@{kDVAFBKeyFailingPermission:[required anyObject]}]);
+                                    }
+                                }
+                            }];
+}
+
+- (BOOL)dva_checkPermission:(NSString *)permission{
+    return ([[FBSDKAccessToken currentAccessToken] hasGranted:permission]);
+}
+
+
+- (NSString *)dva_accessToken {
+    return [[FBSDKAccessToken currentAccessToken]tokenString];
+}
+
+#pragma mark - Facebook events
+- (void)dva_activateFacebookEvents {
+    [FBSDKAppEvents activateApp];
+}
+
+#pragma mark - Sharing methods
+
+- (void)dva_shareContentUrl:(NSURL *)contentURL
+                      title:(NSString *)title
+                description:(NSString *)description
+                   imageURL:(NSURL *)imageURL
+                 controller:(UIViewController *)controller
+                 completion:(DVAFacebookManagerSuccessBlock)completionBlock {
+    if (self.debug) NSLog(@"-- %s -- \n Sharing content url %@\rtitle %@\rdescription %@\rimageUrl %@\rcontroller %@",__PRETTY_FUNCTION__,contentURL,title,description,imageURL,controller);
+
     self.sharingBlock = completionBlock;
     
     FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
@@ -314,6 +209,104 @@
     [shareDialog show];
 }
 
+
+#pragma mark - Usual helpers
+
+- (void)dva_pictureForUserId:(NSString*)userId withCompletion:(DVAFacebookManagerCompletionBlock)completionBlock{
+    NSDictionary *params = @{kDVAFBManagerFacebookType      : kDVAFBManagerFacebookAlbum,
+                             kDVAFBManagerFacebookFields    : [@[kDVAFBManagerFacebookData,kDVAFBManagerFacebookUrl] componentsJoinedByString:@","]}; /* enum{thumbnail,small,album} */
+    
+    
+    if ([self dva_checkPermission:kDVAFBManagerFacebookPhotos]) {
+    [self dva_requestWithGraphPath:[NSString stringWithFormat:kDVAFBManagerFacebookGraphMePicture,userId]
+                     andParameters:params
+                andCompletionBlock:completionBlock];
+    }
+    else{
+        NSError *error = [NSError dva_facebookErrorWithType:kDVAFBEErrorNoPermission andData:@{kDVAFBKeyFailingPermission:kDVAFBManagerFacebookPhotos}];
+        if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions required %@",__PRETTY_FUNCTION__,error);
+        completionBlock(nil,error,NO);
+    }
+}
+
+- (void)dva_albumsWithCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock{
+
+    NSDictionary *params = @{kDVAFBManagerFacebookFields:[@[kDVAFBManagerFacebookData,kDVAFBManagerFacebookName,kDVAFBManagerFacebookObjectId] componentsJoinedByString:@","]};
+    
+    if ([self dva_checkPermission:kDVAFBManagerFacebookPhotos]) {
+        id resultCached=[self.cache objectForKey:kDVAFBManagerFacebookGraphMeAlbums];
+        if (resultCached) {
+            completionBlock(resultCached, nil,YES);
+            return;
+        }
+        [self dva_requestWithGraphPath:kDVAFBManagerFacebookGraphMeAlbums
+                         andParameters:params
+                    andCompletionBlock:completionBlock];
+    }
+    else{
+        NSError *error = [NSError dva_facebookErrorWithType:kDVAFBEErrorNoPermission andData:@{kDVAFBKeyFailingPermission:kDVAFBManagerFacebookPhotos}];
+        if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions required %@",__PRETTY_FUNCTION__,error);
+        completionBlock(nil,error,NO);
+    }
+}
+
+
+- (void)dva_picturesWithAlbumId:(NSString *)albumId completionBlock:(DVAFacebookManagerCompletionBlock)completionBlock {
+    
+    NSDictionary *params = @{kDVAFBManagerFacebookType: kDVAFBManagerFacebookAlbum,
+                             kDVAFBManagerFacebookFields:[@[kDVAFBManagerFacebookData,kDVAFBManagerFacebookImages,kDVAFBManagerFacebookImagesSource] componentsJoinedByString:@","]};
+    NSString *graphPath  = [NSString stringWithFormat:kDVAFBManagerFacebookGraphAlbumPhotos,albumId];
+    [self dva_requestWithGraphPath:graphPath andParameters:params andCompletionBlock:completionBlock];
+}
+
+
+
+- (void)dva_picturesFromProfileAlbumWithCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock {
+    [self dva_albumsWithCompletionBlock:^(id userData, NSError *error, BOOL cached) {
+        NSString *albumId = nil;
+        if (error) {
+            completionBlock(userData,error,cached);
+            return ;
+        }
+        
+        for (NSDictionary *album in [userData objectForKey:kDVAFBManagerFacebookData]) {
+            if ([album[kDVAFBManagerFacebookName] isEqualToString:kDVAFBManagerFacebookProfilePicturesAlbum]){
+                albumId = album[kDVAFBManagerFacebookObjectId];
+            }
+        }
+        
+        if (!albumId) {
+            completionBlock(nil, error,NO);
+        }
+        
+        [self dva_picturesWithAlbumId:albumId completionBlock:^(id userData, NSError *error, BOOL cached) {
+            completionBlock(userData, error,NO);
+        }];
+    }];
+}
+
+- (void)dva_friendsWithCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock {
+    NSDictionary*parameters = @{kDVAFBManagerFacebookFields:[@[kDVAFBManagerFacebookObjectId,kDVAFBManagerFacebookName] componentsJoinedByString:@","]};
+    if ([self dva_checkPermission:kDVAFBManagerFacebookFriends]) {
+        id resultCached=[self.cache objectForKey:kDVAFBManagerFacebookGraphFriends];
+        if (resultCached) {
+            completionBlock(resultCached, nil,YES);
+            return;
+        }
+        [self dva_requestWithGraphPath:kDVAFBManagerFacebookGraphFriends
+                         andParameters:parameters
+                    andCompletionBlock:completionBlock];
+    }
+    else{
+        NSError *error = [NSError dva_facebookErrorWithType:kDVAFBEErrorNoPermission andData:@{kDVAFBKeyFailingPermission:kDVAFBManagerFacebookPhotos}];
+        if (self.debug) NSLog(@"-- %s -- \nERROR: Extra permissions required %@",__PRETTY_FUNCTION__,error);
+        completionBlock(nil,error,NO);
+    }
+}
+
+
+#pragma mark - Private methods
+
 /*!
  @abstract Sent to the delegate when the share completes without error or cancellation.
  @param sharer The FBSDKSharing that completed.
@@ -323,9 +316,14 @@
     
     if (self.sharingBlock) {
         if (results[@"postId"]) {
-            self.sharingBlock (YES,nil);
+            if (self.debug) NSLog(@"-- %s -- \n Sharing content succeed %@",__PRETTY_FUNCTION__,results[@"postId"]);
+
+            if (self.sharingBlock) self.sharingBlock (YES,nil);
         }else{
-            self.sharingBlock (NO,nil);
+
+            NSError*error = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyResponseObject:results}];
+            if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,error);
+            if (self.sharingBlock) self.sharingBlock (NO,error);
         }
     }
 }
@@ -336,7 +334,9 @@
  @param error The error.
  */
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
-    if (self.sharingBlock) self.sharingBlock (NO,error);
+    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyOriginalError:error}];
+    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,newError);
+    if (self.sharingBlock) self.sharingBlock (NO,newError);
 }
 
 /*!
@@ -344,19 +344,17 @@
  @param sharer The FBSDKSharing that completed.
  */
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
-    if (self.sharingBlock) self.sharingBlock (NO,nil);
+    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBEErrorOperationCancelled];
+    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content cancelled %@",__PRETTY_FUNCTION__,newError);
+    if (self.sharingBlock) self.sharingBlock (NO,newError);
 }
 
 #pragma mark - App Delegate Notifications
 
 - (void)didBecomeActiveNotification:(NSNotification *)notification {
-    if (self.debug) NSLog(@"%s %@",__PRETTY_FUNCTION__,notification);
-    
+    if (self.debug) NSLog(@"-- %s -- \n Activating facebook events",__PRETTY_FUNCTION__);
     //Install traking
-    [[DVAFacebookManager shared]activateIntallTraking];
-    
-    //Facebook Evnets
-    [[DVAFacebookManager shared]activateFacebookEvents];
+    [[DVAFacebookManager shared] dva_activateFacebookEvents];
 }
 
 - (void)dealloc {

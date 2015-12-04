@@ -43,6 +43,8 @@ Pod::Spec.new do |s|
 
     s.subspec 'DVAPhotoPickerManager' do |ss|
         ss.frameworks = 'MobileCoreServices'
+        ss.resources = "Pod/Assets/DVAPhotoPickerManager/*"
+        ss.dependency 'DVACategories/NSString', '~>1.0'
         ss.source_files = 'Pod/Classes/DVAPhotoPickerManager/*.{h,m}'
         ss.public_header_files = 'Pod/Classes/DVAPhotoPickerManager/*.{h}'
     end

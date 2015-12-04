@@ -8,8 +8,9 @@
 
 #import "DVAViewController.h"
 #import <DVAManagers/DVALocationManager.h>
+#import <MapKit/MapKit.h>
 @interface DVAViewController ()
-
+@property (weak, nonatomic) IBOutlet MKMapView *map;
 @end
 
 @implementation DVAViewController
@@ -17,12 +18,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    if ([[DVALocationManager sharedInstance] dva_currentAuthStatus] < [[DVALocationManager sharedInstance] dva_LocationAuthType]) [[DVALocationManager sharedInstance] dva_requestLocation:^(NSArray<CLLocation *> *validLocations, NSError *error) {
-        ;
+    // Do any additional setup after loading the view, typically from a nib.
+    [[DVALocationManager sharedInstance] dva_requestLocation:^(NSArray<CLLocation *> *validLocations, NSError *error) {
+        MKCoordinateRegion mapRegion;
+        mapRegion.center = [validLocations lastObject].coordinate;
+        mapRegion.span.latitudeDelta = 0.02;
+        mapRegion.span.longitudeDelta = 0.02;
+        
+        [self.map setRegion:mapRegion animated: YES];
     }];
 
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -13,10 +13,9 @@
 
 @interface DVALocationManager () <CLLocationManagerDelegate>
 
-@property (nonatomic, strong)   CLLocationManager   *locationManager;
+@property (nonatomic, strong)   CLLocationManager       *locationManager;
 @property (nonatomic, copy)     locationHandler         completionBlock;
 @property (nonatomic, copy)     locationAuthHandler     authCompletionBlock;
-@property (strong, nonatomic)   CLLocation          *lastUserLocation;
 
 @end
 
@@ -47,11 +46,12 @@
     if (self) {
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate           = self;
-        self.locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
-        self.locationManager.distanceFilter     = 500;
+        self.locationManager.desiredAccuracy    = kCLLocationAccuracyHundredMeters;
+        self.locationManager.distanceFilter     = kCLDistanceFilterNone;
     }
     return self;
 }
+
 
 #pragma mark -
 #pragma mark - Setters
@@ -66,6 +66,10 @@
 
 -(void)setCompletionBlock:(locationHandler)completionBlock{
     __weak typeof(self) this = self;
+    
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+
     _completionBlock = ^(NSArray <CLLocation *> *validLocations,NSError*error){
         __weak typeof(this) strongSelf = this;
         if (strongSelf.debug) NSLog(@"-- %s -- \n Calling completion block with locations %@ and error %@",__PRETTY_FUNCTION__,validLocations,error);
@@ -85,6 +89,10 @@
 
 #pragma mark -
 #pragma mark - Getters
+
+-(CLLocation*)dva_lastLocation{
+    return [self.locationManager location];
+}
 
 -(locationAuthHandler)authCompletionBlock{
     if (_authCompletionBlock) return _authCompletionBlock;
@@ -118,18 +126,18 @@
 - (void)dva_askForAuthorizationIfNeededWithAuthBlock:(locationAuthHandler)authBlock{
     self.authCompletionBlock = authBlock;
     if (![CLLocationManager locationServicesEnabled]) {
-        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_errorWithType:DVALocationManagerErrorLocationDisabled]);
+        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_locationErrorWithType:DVALocationManagerErrorLocationDisabled]);
     }
     else{
         switch ([self dva_currentAuthStatus]) {
             case kCLAuthorizationStatusDenied:
             {
-                self.authCompletionBlock(kCLAuthorizationStatusDenied,[NSError dva_errorWithType:DVALocationManagerErrorLocationDenied]);
+                self.authCompletionBlock(kCLAuthorizationStatusDenied,[NSError dva_locationErrorWithType:DVALocationManagerErrorLocationDenied]);
             }
                 break;
             case kCLAuthorizationStatusRestricted:
             {
-                self.authCompletionBlock(kCLAuthorizationStatusRestricted,[NSError dva_errorWithType:DVALocationManagerErrorLocationRestricted]);
+                self.authCompletionBlock(kCLAuthorizationStatusRestricted,[NSError dva_locationErrorWithType:DVALocationManagerErrorLocationRestricted]);
             }
                 break;
             case kCLAuthorizationStatusAuthorizedAlways:
@@ -154,7 +162,7 @@
                         break;
                         
                     default:
-                        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_errorWithType:DVALocationManagerErrorAuthUnknown]);
+                        self.authCompletionBlock(kCLAuthorizationStatusNotDetermined,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthUnknown]);
                         break;
                 }
             }
@@ -172,7 +180,7 @@
             self.completionBlock(nil,error);
         }
         else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
-            self.completionBlock(nil,[NSError dva_errorWithType:DVALocationManagerErrorAuthBelowRequired
+            self.completionBlock(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthBelowRequired
                                                         andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
         }
         else{ // Ok
@@ -188,7 +196,7 @@
             self.completionBlock(nil,error);
         }
         else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
-            self.completionBlock(nil,[NSError dva_errorWithType:DVALocationManagerErrorAuthBelowRequired
+            self.completionBlock(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthBelowRequired
                                                         andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
         }
         else{ // Ok
@@ -202,6 +210,38 @@
     [self.locationManager stopUpdatingLocation];
 }
 
+-(void)dva_startRequestingSignificantLocationChanges:(locationHandler)handler{
+    if (![CLLocationManager significantLocationChangeMonitoringAvailable]){
+        handler(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorSignificantLocationChangesNotAvailable]);
+        return;
+    }
+    self.completionBlock = handler;
+    [self dva_askForAuthorizationIfNeededWithAuthBlock:^(CLAuthorizationStatus status, NSError *error) {
+        if (error) { // Auth error
+            self.completionBlock(nil,error);
+        }
+        else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
+            self.completionBlock(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthBelowRequired
+                                                        andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
+        }
+        else{ // Ok
+            [self.locationManager startMonitoringSignificantLocationChanges];
+        }
+    }];
+}
+
+-(void)dva_stopRequestingSignificantLocationChanges{
+    self.completionBlock = nil;
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+
+#pragma mark -
+#pragma mark - Helpers
+
+-(CLLocationDistance)dva_currentLocationDistanceTo:(CLLocation *)location{
+    return [self.dva_lastLocation distanceFromLocation:location];
+}
+
 #pragma mark -
 #pragma mark - CLLocationManagerDelegate
 
@@ -213,6 +253,7 @@
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations {
     self.completionBlock(locations,nil);
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager
