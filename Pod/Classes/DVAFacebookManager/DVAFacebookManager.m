@@ -7,8 +7,12 @@
 //
 
 #import "DVAFacebookManager.h"
+//
+// FBSDKShareKit cannot be included in a pod
+//
+//#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface DVAFacebookManager ()
+@interface DVAFacebookManager () //<FBSDKSharingDelegate>
 
 @property (strong, nonatomic)   DVAFacebookManagerSuccessBlock sharingBlock;
 @property (nonatomic,strong)    DVACache*cache;
@@ -186,6 +190,8 @@
 
 #pragma mark - Sharing methods
 
+//  FBSDKShareKit cannot be included in pod
+//
 - (void)dva_shareContentUrl:(NSURL *)contentURL
                       title:(NSString *)title
                 description:(NSString *)description
@@ -194,19 +200,21 @@
                  completion:(DVAFacebookManagerSuccessBlock)completionBlock {
     if (self.debug) NSLog(@"-- %s -- \n Sharing content url %@\rtitle %@\rdescription %@\rimageUrl %@\rcontroller %@",__PRETTY_FUNCTION__,contentURL,title,description,imageURL,controller);
 
-    self.sharingBlock = completionBlock;
-    
-    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
-    content.contentURL = contentURL;
-    content.contentTitle = title;
-    content.contentDescription = description;
-    
-    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-    [shareDialog setMode:FBSDKShareDialogModeFeedWeb ];
-    [shareDialog setShareContent:content];
-    [shareDialog setFromViewController:controller];
-    [shareDialog setDelegate:self];
-    [shareDialog show];
+//
+//    self.sharingBlock = completionBlock;
+//    
+//    FBSDKShareLinkContent *content = [FBSDKShareLinkContent new];
+//    content.contentURL = contentURL;
+//    content.contentTitle = title;
+//    content.contentDescription = description;
+//    
+//    FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
+//    [shareDialog setMode:FBSDKShareDialogModeFeedWeb ];
+//    [shareDialog setShareContent:content];
+//    [shareDialog setFromViewController:controller];
+//    [shareDialog setDelegate:self];
+//    [shareDialog show];
+    NSAssert(NO, @"This method is not implemented as FBSDKShareKit cannot be included in pod");
 }
 
 
@@ -307,47 +315,49 @@
 
 #pragma mark - Private methods
 
-/*!
- @abstract Sent to the delegate when the share completes without error or cancellation.
- @param sharer The FBSDKSharing that completed.
- @param results The results from the sharer.  This may be nil or empty.
- */
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-    
-    if (self.sharingBlock) {
-        if (results[@"postId"]) {
-            if (self.debug) NSLog(@"-- %s -- \n Sharing content succeed %@",__PRETTY_FUNCTION__,results[@"postId"]);
-
-            if (self.sharingBlock) self.sharingBlock (YES,nil);
-        }else{
-
-            NSError*error = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyResponseObject:results}];
-            if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,error);
-            if (self.sharingBlock) self.sharingBlock (NO,error);
-        }
-    }
-}
-
-/*!
- @abstract Sent to the delegate when the sharer encounters an error.
- @param sharer The FBSDKSharing that completed.
- @param error The error.
- */
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
-    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyOriginalError:error}];
-    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,newError);
-    if (self.sharingBlock) self.sharingBlock (NO,newError);
-}
-
-/*!
- @abstract Sent to the delegate when the sharer is cancelled.
- @param sharer The FBSDKSharing that completed.
- */
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
-    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBEErrorOperationCancelled];
-    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content cancelled %@",__PRETTY_FUNCTION__,newError);
-    if (self.sharingBlock) self.sharingBlock (NO,newError);
-}
+// FBSDKShareKit cannot be included in a pod
+//
+///*!
+// @abstract Sent to the delegate when the share completes without error or cancellation.
+// @param sharer The FBSDKSharing that completed.
+// @param results The results from the sharer.  This may be nil or empty.
+// */
+//- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+//    
+//    if (self.sharingBlock) {
+//        if (results[@"postId"]) {
+//            if (self.debug) NSLog(@"-- %s -- \n Sharing content succeed %@",__PRETTY_FUNCTION__,results[@"postId"]);
+//
+//            if (self.sharingBlock) self.sharingBlock (YES,nil);
+//        }else{
+//
+//            NSError*error = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyResponseObject:results}];
+//            if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,error);
+//            if (self.sharingBlock) self.sharingBlock (NO,error);
+//        }
+//    }
+//}
+//
+///*!
+// @abstract Sent to the delegate when the sharer encounters an error.
+// @param sharer The FBSDKSharing that completed.
+// @param error The error.
+// */
+//- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+//    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBENotSharedContent andData:@{kDVAFBKeyOriginalError:error}];
+//    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content failed %@",__PRETTY_FUNCTION__,newError);
+//    if (self.sharingBlock) self.sharingBlock (NO,newError);
+//}
+//
+///*!
+// @abstract Sent to the delegate when the sharer is cancelled.
+// @param sharer The FBSDKSharing that completed.
+// */
+//- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+//    NSError*newError = [NSError dva_facebookErrorWithType:kDVAFBEErrorOperationCancelled];
+//    if (self.debug) NSLog(@"-- %s -- \nERROR: Sharing content cancelled %@",__PRETTY_FUNCTION__,newError);
+//    if (self.sharingBlock) self.sharingBlock (NO,newError);
+//}
 
 #pragma mark - App Delegate Notifications
 
