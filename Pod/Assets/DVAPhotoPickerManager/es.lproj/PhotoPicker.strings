@@ -1,0 +1,12 @@
+/* 
+  PhotoPicker.strings
+  Pods
+
+  Created by Pablo Romeu on 27/11/15.
+
+*/
+
+"select_choice"     = "Elige una opción";
+"take_photo"        = "Hacer una foto";
+"gallery_action"    = "Elegir de la galería";
+"cancel_button"     = "Cancelar";

@@ -11,31 +11,56 @@ Pod::Spec.new do |s|
   s.version          = "1.0.0"
   s.summary          = "Common DVAManagers for iOS Apps"
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+This pod implements managers for common tasks like:
+- Using a paginated resource
+- Photo picker
+- Location Manager
+- Facebook Manager
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/DVAManagers"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://bitbucket.org/dvalibs/dvamanagers"
   s.license          = 'MIT'
   s.author           = { "Pablo Romeu" => "pablo.romeu@develapps.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/DVAManagers.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    s.source           = {      :git => "https://bitbucket.com/DVALibs/DVAManagers.git",
+                                :tag => s.version.to_s,
+                                :submodules => true }
+  s.social_media_url = 'https://twitter.com/pabloromeu'
 
   s.platform     = :ios, '9.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'DVAManagers' => ['Pod/Assets/*.png']
-  }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.source_files = 'Pod/Classes/DVAManagers.h'
+    s.public_header_files = 'Pod/Classes/DVAManagers.h'
 
+    s.subspec 'DVANetworkPaginatedResource' do |ss|
+        ss.dependency 'AFNetworking', '~> 2.6'
+        ss.dependency 'DVACache', '~>1.1'
+        ss.source_files = 'Pod/Classes/DVANetworkPaginatedResource/*.{h,m}'
+        ss.public_header_files = 'Pod/Classes/DVANetworkPaginatedResource/*.{h}'
+    end
+
+    s.subspec 'DVAPhotoPickerManager' do |ss|
+        ss.frameworks = 'MobileCoreServices'
+        ss.resources = "Pod/Assets/DVAPhotoPickerManager/*"
+        ss.dependency 'DVACategories/NSString', '~>1.0'
+        ss.source_files = 'Pod/Classes/DVAPhotoPickerManager/*.{h,m}'
+        ss.public_header_files = 'Pod/Classes/DVAPhotoPickerManager/*.{h}'
+    end
+
+    s.subspec 'DVALocationManager' do |ss|
+        ss.frameworks = 'CoreLocation'
+        ss.source_files = 'Pod/Classes/DVALocationManager/*.{h,m}'
+        ss.public_header_files = 'Pod/Classes/DVALocationManager/*.{h}'
+    end
+
+    s.subspec 'DVAFacebookManager' do |ss|
+        ss.dependency 'FBSDKCoreKit', '~> 4.8'
+        ss.dependency 'FBSDKLoginKit', '~> 4.8'
+#        ss.dependency 'FBSDKShareKit', '~> 4.8'
+        ss.dependency 'DVACache', '~>1.1'
+        ss.source_files = 'Pod/Classes/DVAFacebookManager/*.{h,m}'
+        ss.public_header_files = 'Pod/Classes/DVAFacebookManager/*.{h}'
+    end
 end

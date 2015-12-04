@@ -1,14 +1,117 @@
 PODS:
-  - DVAManagers (0.1.0)
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Bolts (1.5.0):
+    - Bolts/AppLinks (= 1.5.0)
+    - Bolts/Tasks (= 1.5.0)
+  - Bolts/AppLinks (1.5.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.5.0)
+  - DVACache (1.1.0):
+    - DVACategories/NSString (~> 1.4)
+  - DVACategories/NSArray (1.7.0)
+  - DVACategories/NSAttributedString (1.7.0)
+  - DVACategories/NSString (1.7.0):
+    - DVACategories/NSAttributedString
+  - DVAManagers (1.0.0):
+    - DVAManagers/DVAFacebookManager (= 1.0.0)
+    - DVAManagers/DVALocationManager (= 1.0.0)
+    - DVAManagers/DVANetworkPaginatedResource (= 1.0.0)
+    - DVAManagers/DVAPhotoPickerManager (= 1.0.0)
+  - DVAManagers/DVAFacebookManager (1.0.0):
+    - DVACache (~> 1.1)
+    - FBSDKCoreKit (~> 4.8)
+    - FBSDKLoginKit (~> 4.8)
+    - FBSDKShareKit (~> 4.8)
+  - DVAManagers/DVALocationManager (1.0.0)
+  - DVAManagers/DVANetworkPaginatedResource (1.0.0):
+    - AFNetworking (~> 2.6)
+    - DVACache (~> 1.1)
+  - DVAManagers/DVAPhotoPickerManager (1.0.0):
+    - DVACategories/NSString (~> 1.0)
+  - DVANetworkTestStubs (1.0.0):
+    - AFNetworking (~> 2.6)
+    - OHHTTPStubs (~> 4.6)
+  - DVAPopupViewController (1.0.0):
+    - DVAPopupViewController/Buttons (= 1.0.0)
+    - DVAPopupViewController/Categories (= 1.0.0)
+    - DVAPopupViewController/viewConfigurator (= 1.0.0)
+    - DVAPopupViewController/viewController (= 1.0.0)
+  - DVAPopupViewController/Buttons (1.0.0)
+  - DVAPopupViewController/Categories (1.0.0):
+    - DVACategories/NSArray (~> 1.6)
+    - DVAPopupViewController/Buttons
+    - DVAPopupViewController/viewConfigurator
+    - DVAPopupViewController/viewController
+  - DVAPopupViewController/viewConfigurator (1.0.0)
+  - DVAPopupViewController/viewController (1.0.0):
+    - DVAPopupViewController/viewConfigurator
+  - FBSDKCoreKit (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.8.0)
+    - FBSDKCoreKit/no-arc (= 4.8.0)
+  - FBSDKCoreKit/arc (4.8.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.8.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.8.0):
+    - FBSDKCoreKit
+  - OHHTTPStubs (4.6.0):
+    - OHHTTPStubs/Default (= 4.6.0)
+  - OHHTTPStubs/Core (4.6.0)
+  - OHHTTPStubs/Default (4.6.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (4.6.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (4.6.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (4.6.0)
 
 DEPENDENCIES:
   - DVAManagers (from `../`)
+  - DVANetworkTestStubs (~> 1.0.0)
+  - DVAPopupViewController (~> 1.0.0)
 
 EXTERNAL SOURCES:
   DVAManagers:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DVAManagers: cadada6c391da8ecebcea4488db1d2792e6c64c3
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  DVACache: d246a62adce8da9c06023fbd9382bff9db4dc013
+  DVACategories: c5ba01a73ba1904d815406210795c3a79a898b5f
+  DVAManagers: 70700b9356ac2c1dc1f45b49d1edab9d9bebe9ea
+  DVANetworkTestStubs: bacd5c40b148975fc2bdf2d1cfb90a63f015b9fe
+  DVAPopupViewController: c8a35a0b5779b8b9ebe29823a0b9431484a4f5a7
+  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
+  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
+  OHHTTPStubs: cb1aefbbeb4de4e741644455d4b945538e5248a2
 
 COCOAPODS: 0.39.0

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		279F995DD7607FFD5A19DC03 /* Pods_DVAManagers_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B7A5BE20076555F025505FB /* Pods_DVAManagers_Tests.framework */; };
+		3DE8FC364D11E42E16FEAB2F /* libPods-DVAManagers_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -20,9 +20,17 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6E5BE6EA1C11B09100711061 /* DVAFacebookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */; };
+		6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */; };
+		6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */; };
+		6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */; };
+		6EE0762A1C084F6000CE5408 /* FirstPage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076231C084F6000CE5408 /* FirstPage.json */; };
+		6EE0762B1C084F6000CE5408 /* SecondPage.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076241C084F6000CE5408 /* SecondPage.json */; };
+		6EE0762D1C084FDD00CE5408 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE0762C1C084FDD00CE5408 /* MapKit.framework */; };
+		6EE0762F1C08544600CE5408 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */; };
+		6EE076311C0860C100CE5408 /* develapps-cs.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6EE076301C0860C100CE5408 /* develapps-cs.gpx */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		C69B2525F74C5DC472802F7B /* Pods_DVAManagers_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91E95CBC3E5D7476D2449B5 /* Pods_DVAManagers_Example.framework */; };
+		9E1BA92B5AA9336A099AD64F /* libPods-DVAManagers_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		29CA46446C14CCA993541354 /* Pods-DVAManagers_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4B7A5BE20076555F025505FB /* Pods_DVAManagers_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DVAManagers_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6003F58A195388D20070C39A /* DVAManagers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = DVAManagers.app; path = DVAManagers_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		106CDB9B5CB76ADCACC8B8C2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		21ECDC79F521DCCDA4F191C7 /* Pods-DVAManagers_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		27F6B94118A794CD9A278804 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		2A5E8C4AFC18F9EA418DC246 /* Pods-DVAManagers_ExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_ExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_ExampleUITests/Pods-DVAManagers_ExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2C06DD74E00554AA459EBB15 /* Pods-DVAManagers_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		6003F58A195388D20070C39A /* DVAManagers_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DVAManagers_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -51,20 +62,31 @@
 		6003F5A5195388D20070C39A /* DVAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DVAViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* DVAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DVAViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.xctest; path = DVAManagers_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DVAManagers_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		86133BBE9779F635329C49DF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		6E5BE6E81C11B09100711061 /* DVAFacebookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVAFacebookTableViewController.h; sourceTree = "<group>"; };
+		6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVAFacebookTableViewController.m; sourceTree = "<group>"; };
+		6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVAPhotoPickerTableViewController.h; sourceTree = "<group>"; };
+		6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVAPhotoPickerTableViewController.m; sourceTree = "<group>"; };
+		6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVALocationManagerTests.m; sourceTree = "<group>"; };
+		6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVANetworkPaginatedResourceTests.m; sourceTree = "<group>"; };
+		6EE076231C084F6000CE5408 /* FirstPage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FirstPage.json; sourceTree = "<group>"; };
+		6EE076241C084F6000CE5408 /* SecondPage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SecondPage.json; sourceTree = "<group>"; };
+		6EE076251C084F6000CE5408 /* TestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsConstants.h; sourceTree = "<group>"; };
+		6EE0762C1C084FDD00CE5408 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6EE076301C0860C100CE5408 /* develapps-cs.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "develapps-cs.gpx"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A91E95CBC3E5D7476D2449B5 /* Pods_DVAManagers_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DVAManagers_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AABEB5818DF9BCA14E1AAC6A /* Pods-DVAManagers_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		CDF04D16DC55A8FC487E1B87 /* DVAManagers.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DVAManagers.podspec; path = ../DVAManagers.podspec; sourceTree = "<group>"; };
-		EC0A3638F9A8FDC3ADDAB1BE /* Pods-DVAManagers_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.release.xcconfig"; sourceTree = "<group>"; };
-		EC1FB84E13B63A6593D67CE0 /* Pods-DVAManagers_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		FB1B9C2112189975A45E6943 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVAManagers_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC6C4317C2925591AFDC041E /* Pods-DVAManagers_ExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_ExampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_ExampleUITests/Pods-DVAManagers_ExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BDA33D97753CFEFCD2B40979 /* Pods-DVAManagers_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example.release.xcconfig"; sourceTree = "<group>"; };
+		BF195B045CC795E902231089 /* DVAManagers.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DVAManagers.podspec; path = ../DVAManagers.podspec; sourceTree = "<group>"; };
+		D15B243BB983FCC5F0D46720 /* Pods-DVAManagers_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DVAManagers_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		E76B8C32E33F50D9D0F522D8 /* libPods-DVAManagers_ExampleUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVAManagers_ExampleUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DVAManagers_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +96,9 @@
 			files = (
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
+				6EE0762D1C084FDD00CE5408 /* MapKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				C69B2525F74C5DC472802F7B /* Pods_DVAManagers_Example.framework in Frameworks */,
+				9E1BA92B5AA9336A099AD64F /* libPods-DVAManagers_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +109,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				279F995DD7607FFD5A19DC03 /* Pods_DVAManagers_Tests.framework in Frameworks */,
+				3DE8FC364D11E42E16FEAB2F /* libPods-DVAManagers_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,15 +124,15 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				8C9F176B54221AB3213F5B47 /* Pods */,
+				E6E12E743242189BA6A42D9E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* DVAManagers.app */,
-				6003F5AE195388D20070C39A /* Tests.xctest */,
+				6003F58A195388D20070C39A /* DVAManagers_Example.app */,
+				6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,12 +140,14 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EE0762C1C084FDD00CE5408 /* MapKit.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				A91E95CBC3E5D7476D2449B5 /* Pods_DVAManagers_Example.framework */,
-				4B7A5BE20076555F025505FB /* Pods_DVAManagers_Tests.framework */,
+				A57C569CACDD616EA84B1740 /* libPods-DVAManagers_Example.a */,
+				EA0F04C3EC4A6CA2C9F1B71A /* libPods-DVAManagers_Tests.a */,
+				E76B8C32E33F50D9D0F522D8 /* libPods-DVAManagers_ExampleUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,10 +158,12 @@
 				6003F59C195388D20070C39A /* DVAAppDelegate.h */,
 				6003F59D195388D20070C39A /* DVAAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* DVAViewController.h */,
-				6003F5A6195388D20070C39A /* DVAViewController.m */,
+				6E5BE6E71C11B07600711061 /* photoController */,
+				6E5BE6E61C11B02000711061 /* facebookController */,
+				6E5BE6E51C11B00B00711061 /* locationController */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				6EE0762E1C08544600CE5408 /* LaunchScreen.storyboard */,
 			);
 			name = "Example for DVAManagers";
 			path = DVAManagers;
@@ -156,7 +183,9 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				6EE076251C084F6000CE5408 /* TestsConstants.h */,
+				6EE0761C1C084F6000CE5408 /* locationManagerTests */,
+				6EE076211C084F6000CE5408 /* paginatedResourceTests */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -175,20 +204,76 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				CDF04D16DC55A8FC487E1B87 /* DVAManagers.podspec */,
-				86133BBE9779F635329C49DF /* README.md */,
-				FB1B9C2112189975A45E6943 /* LICENSE */,
+				BF195B045CC795E902231089 /* DVAManagers.podspec */,
+				106CDB9B5CB76ADCACC8B8C2 /* README.md */,
+				27F6B94118A794CD9A278804 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		8C9F176B54221AB3213F5B47 /* Pods */ = {
+		6E5BE6E51C11B00B00711061 /* locationController */ = {
 			isa = PBXGroup;
 			children = (
-				AABEB5818DF9BCA14E1AAC6A /* Pods-DVAManagers_Example.debug.xcconfig */,
-				EC0A3638F9A8FDC3ADDAB1BE /* Pods-DVAManagers_Example.release.xcconfig */,
-				EC1FB84E13B63A6593D67CE0 /* Pods-DVAManagers_Tests.debug.xcconfig */,
-				29CA46446C14CCA993541354 /* Pods-DVAManagers_Tests.release.xcconfig */,
+				6003F5A5195388D20070C39A /* DVAViewController.h */,
+				6003F5A6195388D20070C39A /* DVAViewController.m */,
+			);
+			name = locationController;
+			sourceTree = "<group>";
+		};
+		6E5BE6E61C11B02000711061 /* facebookController */ = {
+			isa = PBXGroup;
+			children = (
+				6E5BE6E81C11B09100711061 /* DVAFacebookTableViewController.h */,
+				6E5BE6E91C11B09100711061 /* DVAFacebookTableViewController.m */,
+			);
+			name = facebookController;
+			sourceTree = "<group>";
+		};
+		6E5BE6E71C11B07600711061 /* photoController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC744E01C0C985B00C2748F /* DVAPhotoPickerTableViewController.h */,
+				6EC744E11C0C985B00C2748F /* DVAPhotoPickerTableViewController.m */,
+			);
+			name = photoController;
+			sourceTree = "<group>";
+		};
+		6EE0761C1C084F6000CE5408 /* locationManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EE0761D1C084F6000CE5408 /* DVALocationManagerTests.m */,
+				6EE0761E1C084F6000CE5408 /* routes */,
+			);
+			path = locationManagerTests;
+			sourceTree = "<group>";
+		};
+		6EE0761E1C084F6000CE5408 /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				6EE076301C0860C100CE5408 /* develapps-cs.gpx */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		6EE076211C084F6000CE5408 /* paginatedResourceTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EE076221C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m */,
+				6EE076231C084F6000CE5408 /* FirstPage.json */,
+				6EE076241C084F6000CE5408 /* SecondPage.json */,
+			);
+			path = paginatedResourceTests;
+			sourceTree = "<group>";
+		};
+		E6E12E743242189BA6A42D9E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				21ECDC79F521DCCDA4F191C7 /* Pods-DVAManagers_Example.debug.xcconfig */,
+				BDA33D97753CFEFCD2B40979 /* Pods-DVAManagers_Example.release.xcconfig */,
+				D15B243BB983FCC5F0D46720 /* Pods-DVAManagers_Tests.debug.xcconfig */,
+				2C06DD74E00554AA459EBB15 /* Pods-DVAManagers_Tests.release.xcconfig */,
+				2A5E8C4AFC18F9EA418DC246 /* Pods-DVAManagers_ExampleUITests.debug.xcconfig */,
+				BC6C4317C2925591AFDC041E /* Pods-DVAManagers_ExampleUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -200,12 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DVAManagers_Example" */;
 			buildPhases = (
-				1A76FF992BD78D06DD5F3220 /* Check Pods Manifest.lock */,
+				6D6E8197A3E05A081E057BE6 /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				4BC4348E6416C12D5388E682 /* Embed Pods Frameworks */,
-				9E94ADCC9CA575B88171828D /* Copy Pods Resources */,
+				BC7EDDD38E1BCB289166470C /* Embed Pods Frameworks */,
+				C88165EBEC8E59FAF80F2244 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,19 +298,19 @@
 			);
 			name = DVAManagers_Example;
 			productName = DVAManagers;
-			productReference = 6003F58A195388D20070C39A /* DVAManagers.app */;
+			productReference = 6003F58A195388D20070C39A /* DVAManagers_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* DVAManagers_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "DVAManagers_Tests" */;
 			buildPhases = (
-				30AFE5E6FFC738B79959A2E4 /* Check Pods Manifest.lock */,
+				3BECD2094C65D7DA6ABBD585 /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				88195C3ACC2DACB0073DD07B /* Embed Pods Frameworks */,
-				6270E13D7128DB1D55FE9D8B /* Copy Pods Resources */,
+				935B70D30E9C47D05C7779B5 /* Embed Pods Frameworks */,
+				5550BC394055A500968516B3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -234,7 +319,7 @@
 			);
 			name = DVAManagers_Tests;
 			productName = DVAManagersTests;
-			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* DVAManagers_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -244,9 +329,16 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DVA;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Pablo Romeu";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -276,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EE076311C0860C100CE5408 /* develapps-cs.gpx in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
@@ -286,14 +379,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EE0762F1C08544600CE5408 /* LaunchScreen.storyboard in Resources */,
+				6EE0762B1C084F6000CE5408 /* SecondPage.json in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				6EE0762A1C084F6000CE5408 /* FirstPage.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1A76FF992BD78D06DD5F3220 /* Check Pods Manifest.lock */ = {
+		3BECD2094C65D7DA6ABBD585 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,37 +404,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		30AFE5E6FFC738B79959A2E4 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		4BC4348E6416C12D5388E682 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6270E13D7128DB1D55FE9D8B /* Copy Pods Resources */ = {
+		5550BC394055A500968516B3 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -353,7 +419,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		88195C3ACC2DACB0073DD07B /* Embed Pods Frameworks */ = {
+		6D6E8197A3E05A081E057BE6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		935B70D30E9C47D05C7779B5 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -368,7 +449,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DVAManagers_Tests/Pods-DVAManagers_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E94ADCC9CA575B88171828D /* Copy Pods Resources */ = {
+		BC7EDDD38E1BCB289166470C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DVAManagers_Example/Pods-DVAManagers_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C88165EBEC8E59FAF80F2244 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -390,6 +486,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5BE6EA1C11B09100711061 /* DVAFacebookTableViewController.m in Sources */,
+				6EC744E21C0C985B00C2748F /* DVAPhotoPickerTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* DVAAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* DVAViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
@@ -400,7 +498,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				6EE076261C084F6000CE5408 /* DVALocationManagerTests.m in Sources */,
+				6EE076291C084F6000CE5408 /* DVANetworkPaginatedResourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +551,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -466,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,7 +599,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -508,14 +608,15 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AABEB5818DF9BCA14E1AAC6A /* Pods-DVAManagers_Example.debug.xcconfig */;
+			baseConfigurationReference = 21ECDC79F521DCCDA4F191C7 /* Pods-DVAManagers_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DVAManagers/DVAManagers-Prefix.pch";
 				INFOPLIST_FILE = "DVAManagers/DVAManagers-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.DVAManagers-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -523,14 +624,15 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC0A3638F9A8FDC3ADDAB1BE /* Pods-DVAManagers_Example.release.xcconfig */;
+			baseConfigurationReference = BDA33D97753CFEFCD2B40979 /* Pods-DVAManagers_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DVAManagers/DVAManagers-Prefix.pch";
 				INFOPLIST_FILE = "DVAManagers/DVAManagers-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.DVAManagers-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -538,7 +640,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC1FB84E13B63A6593D67CE0 /* Pods-DVAManagers_Tests.debug.xcconfig */;
+			baseConfigurationReference = D15B243BB983FCC5F0D46720 /* Pods-DVAManagers_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -553,6 +655,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DVAManagers_Example.app/DVAManagers_Example";
 				WRAPPER_EXTENSION = xctest;
@@ -561,7 +664,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29CA46446C14CCA993541354 /* Pods-DVAManagers_Tests.release.xcconfig */;
+			baseConfigurationReference = 2C06DD74E00554AA459EBB15 /* Pods-DVAManagers_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -572,6 +675,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DVAManagers_Example.app/DVAManagers_Example";
 				WRAPPER_EXTENSION = xctest;
