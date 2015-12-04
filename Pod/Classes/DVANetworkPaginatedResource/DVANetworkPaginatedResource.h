@@ -11,7 +11,7 @@
 #import <DVACache/DVACache.h>
 
 typedef enum : NSUInteger {
-    DVAPaginatedResponseCacheOrNetwork          = 0, // Cache or Network
+    DVAPaginatedResponseCacheOrNetwork          = 0, // Cache and if not, Network
     DVAPaginatedResponseCacheThenNetwork        = 1, // Cache then Network
     DVAPaginatedResponseNetworkOnly             = 2, // Network only
 } DVAPaginatedResponse;
@@ -26,9 +26,9 @@ typedef void(^networkPaginatedResourceHandler)(BOOL fromCache,NSArray *items, NS
 @property (readonly, getter=isCompleted)    BOOL            completed;
 @property (readonly, getter=isDownloading)  BOOL            downloading;
 
-@property (nonatomic, copy)                 NSString        *emptyDatasetMessage;
-@property (nonatomic, strong)               DVACache                *cache;
-@property (nonatomic)                       DVAPaginatedResponse    cacheBehaviour;
+@property (nonatomic, copy)                 NSString                *emptyDatasetMessage;
+@property (nonatomic, strong)               DVACache                *cache;             // Defaults to shared cache
+@property (nonatomic)                       DVAPaginatedResponse    cacheBehaviour;     // Defaults to cache or network
 
 @property (nonatomic)                       BOOL            debug;
 
