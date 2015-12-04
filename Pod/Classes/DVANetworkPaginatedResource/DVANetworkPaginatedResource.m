@@ -42,8 +42,8 @@
 
 -(DVACache*)cache{
     if (!_cache){
-        _cache=[[DVACache alloc] initWithName:[_nextURL stringByAppendingString:@"DISABLED"]];
-        [_cache setEnabled:NO];
+        _cache=[DVACache sharedInstance];
+        [_cache setEnabled:YES];
     };
     return _cache;
 }
