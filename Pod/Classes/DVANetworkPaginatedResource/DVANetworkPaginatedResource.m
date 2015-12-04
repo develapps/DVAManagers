@@ -82,9 +82,11 @@
     self.downloading = YES;
     
     [self.cache objectForKey:cachedUrl withCompletionBlock:^(id jsonObject) {
-        if (jsonObject && self.cache.enabled) {
+        if (jsonObject &&
+            self.cacheBehaviour != DVAPaginatedResponseNetworkOnly) // If we want cache...
+        {
             [self processResponseForJson:jsonObject cached:YES withHandler:handler];
-            return;
+            if (self.cacheBehaviour != DVAPaginatedResponseCacheThenNetwork) return; // Make the call anyway
         }
         if (_debug) NSLog(@"-- %s -- \n Quering for :%@ parameters: %@",__PRETTY_FUNCTION__,self.nextURL,self.parameters);
         [self.apiProvider GET:self.nextURL parameters:self.parameters success:^(NSURLSessionDataTask *task, id json) {
