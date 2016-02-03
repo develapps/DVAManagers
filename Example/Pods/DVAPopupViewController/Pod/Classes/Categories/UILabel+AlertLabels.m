@@ -28,6 +28,7 @@
 +(UILabel*)dva_bodyLabelWithText:(NSString*)text{
     NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentJustified;
+    style.lineBreakMode = NSLineBreakByWordWrapping;
     style.firstLineHeadIndent = 10;
     style.headIndent = 10;
     style.tailIndent = -10;

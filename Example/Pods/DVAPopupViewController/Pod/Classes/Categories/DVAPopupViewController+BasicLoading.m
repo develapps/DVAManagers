@@ -7,7 +7,6 @@
 //
 
 #import "DVAPopupViewController+BasicLoading.h"
-#import "UIActivityIndicatorView+LoadingSpinners.h"
 #import "DVAPopupViewConfigurator+PredefinedConfigurators.h"
 #import "UILabel+AlertLabels.h"
 #import "DVAPopupViewButton+BasicButtons.h"
@@ -15,13 +14,15 @@
 @implementation DVAPopupViewController (BasicLoading)
 
 +(DVAPopupViewController *)dva_loadingSpinnerAlertWithStyle:(UIActivityIndicatorViewStyle)style{
-    UIStackView*spinner = [UIActivityIndicatorView dva_spinnerWithStyle:style];
-    return [DVAPopupViewController controllerWithConfigurator:[DVAPopupViewConfigurator dva_configuratorClearContainerViewAndViews:@[spinner]]];
+    UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [view startAnimating];
+    return [DVAPopupViewController controllerWithConfigurator:[DVAPopupViewConfigurator dva_configuratorClearContainerViewAndViews:@[view]]];
 }
 
 
 +(DVAPopupViewController*)dva_loadingSpinnerAlertWithText:(NSString*)text{
-    UIStackView*spinner = [UIActivityIndicatorView dva_spinnerWithStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
     UILabel *label = [UILabel dva_bodyLabelWithText:text];
     DVAPopupViewController*controller = [DVAPopupViewController controllerWithConfigurator:[DVAPopupViewConfigurator dva_configuratorRoundedCornersAndViews:@[label,spinner]]];
     

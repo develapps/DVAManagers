@@ -1,0 +1,12 @@
+/* 
+  DVAPopupController.strings
+  Pods
+
+  Created by Pablo Romeu on 25/11/15.
+
+*/
+
+"DVAPopupController_OK_BUTTON"          = "OK";
+"DVAPopupController_CANCEL_BUTTON"      = "Cancelar";
+"DVAPopupController_OKEY_BUTTON"        = "Que sí!";
+"DVAPopupController_NAI_BUTTON"         = "Nanaidelachina!";

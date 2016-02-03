@@ -8,22 +8,23 @@
 
 #import "DVAPopupViewButton+BasicButtons.h"
 #import "NSArray+DVALib.h"
+#import "NSString+DVALocalized.h"
 
 @implementation DVAPopupViewButton (BasicButtons)
 
 #pragma mark - Default OK and Cancel buttons
 
 +(DVAPopupViewButton *)dva_okButtonWithBlock:(void (^)(DVAPopupViewButton *button))completionBlock{
-    return [DVAPopupViewButton dva_buttonWithText:@"OK" withBlock:completionBlock];
+    return [DVAPopupViewButton dva_buttonWithText:[@"DVAPopupController_OK_BUTTON" dva_localizedStringForTable:@"DVAPopupController" inBundle:[NSBundle bundleForClass:[self class]]] withBlock:completionBlock];
 }
 
 +(UIStackView *)dva_okAndCancelButtonWithBlock:(void (^)(DVAPopupViewButton *))completionBlock{
     NSAttributedString*attributedString = [[NSAttributedString alloc]
-                                           initWithString:@"OK"
+                                           initWithString:[@"DVAPopupController_OK_BUTTON" dva_localizedStringForTable:@"DVAPopupController" inBundle:[NSBundle bundleForClass:[self class]]]
                                            attributes:@{NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleTitle3],
                                                         NSForegroundColorAttributeName : [UIColor blueColor]}];
     NSAttributedString*cancelAttributedString = [[NSAttributedString alloc]
-                                                 initWithString:@"Cancel"
+                                                 initWithString:[@"DVAPopupController_CANCEL_BUTTON" dva_localizedStringForTable:@"DVAPopupController" inBundle:[NSBundle bundleForClass:[self class]]]
                                                  attributes:@{NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleTitle3],
                                                               NSForegroundColorAttributeName : [UIColor grayColor]}];
     return [DVAPopupViewButton dva_buttonStackWithAttributedArray:@[attributedString,cancelAttributedString] andBlock:completionBlock];

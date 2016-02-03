@@ -40,7 +40,7 @@
 -(void)setupWithConfigurator:(DVAPopupViewConfigurator*)configurator{
     self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self setViewBackground:configurator.background];
-    if (configurator.containerView) _containerView = configurator.containerView;
+    _containerView = configurator.containerView;
     [self setupContainerView];
     self.spacing = configurator.spacing;
     [self setContainerMode:configurator.containerMode];
@@ -80,7 +80,7 @@
                                                                            options:0
                                                                            metrics:nil
                                                                              views:NSDictionaryOfVariableBindings(_containerView)]];
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_containerView(>=50)]"
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_containerView(>=100)]"
                                                                            options:0
                                                                            metrics:nil
                                                                              views:NSDictionaryOfVariableBindings(_containerView)]];
@@ -123,7 +123,6 @@
         return _stackView;
     }
     _stackView = [[UIStackView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    [_stackView setBackgroundColor:[UIColor blueColor]];
     [_stackView setAlignment:UIStackViewAlignmentCenter];
     [_stackView setDistribution:UIStackViewDistributionEqualSpacing];
     [_stackView setAxis:UILayoutConstraintAxisVertical];
@@ -184,13 +183,25 @@
     [self.containerView addSubview:_stackView];
     [_stackView setAxis:UILayoutConstraintAxisVertical];
     [_stackView setAlignment:UIStackViewAlignmentFill];
-    [_stackView setDistribution:UIStackViewDistributionFillProportionally];
+    [_stackView setDistribution:UIStackViewDistributionFill];
     [_stackView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_stackView setSpacing:self.spacing];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_stackView]-|"
                                                                       options:0 metrics:nil views:NSDictionaryOfVariableBindings(_stackView)]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_stackView]-|"
                                                                       options:0 metrics:nil views:NSDictionaryOfVariableBindings(_stackView)]];
+}
+
+-(NSString *)description{
+    NSString*desc = [super description];
+    for (NSString*name in @[@"_blurEffectView",@"_containerView",@"_stackView",@"_views"]) {
+        desc = [desc stringByAppendingFormat:@"\r %@\t:\t%@",name,[self valueForKey:name]];
+    }
+    for (NSString*name in @[@"_backgroundType"]) {
+        desc = [desc stringByAppendingFormat:@"\r %@\t:\t%@",name,[self valueForKey:name]];
+    }
+
+    return desc;
 }
 
 @end
