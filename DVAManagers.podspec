@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DVAManagers"
-  s.version          = "1.2.0"
+  s.version          = "1.2.1"
   s.summary          = "Common DVAManagers for iOS Apps"
 
   s.description      = <<-DESC
@@ -40,7 +40,7 @@ Added cache types at paginated resource
     s.public_header_files = 'Pod/Classes/DVAManagers.h'
 
     s.subspec 'DVANetworkPaginatedResource' do |ss|
-        ss.dependency 'AFNetworking', '~> 2.6'
+        ss.dependency 'AFNetworking', '~> 3.0'
         ss.dependency 'DVACache', '~>1.1'
         ss.source_files = 'Pod/Classes/DVANetworkPaginatedResource/*.{h,m}'
         ss.public_header_files = 'Pod/Classes/DVANetworkPaginatedResource/*.{h}'

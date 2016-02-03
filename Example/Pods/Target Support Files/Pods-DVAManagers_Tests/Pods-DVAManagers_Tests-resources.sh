@@ -60,10 +60,14 @@ install_resource()
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "../../Pod/Assets/DVAPhotoPickerManager/en.lproj"
   install_resource "../../Pod/Assets/DVAPhotoPickerManager/es.lproj"
+  install_resource "DVAPopupViewController/Pod/Assets/en.lproj"
+  install_resource "DVAPopupViewController/Pod/Assets/es.lproj"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../Pod/Assets/DVAPhotoPickerManager/en.lproj"
   install_resource "../../Pod/Assets/DVAPhotoPickerManager/es.lproj"
+  install_resource "DVAPopupViewController/Pod/Assets/en.lproj"
+  install_resource "DVAPopupViewController/Pod/Assets/es.lproj"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

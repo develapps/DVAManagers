@@ -7,6 +7,10 @@
 //
 
 #import "XCTestCase+DVANetworkStub.h"
+#import <OHHTTPStubs/OHHTTPStubs.h>
+#import <OHHTTPStubs/OHHTTPStubsResponse+JSON.h>
+#import <OHHTTPStubs/OHPathHelpers.h>
+#import <AFNetworking/AFNetworking.h>
 
 
 @implementation DVANetworkStubConfigurator
@@ -110,6 +114,7 @@
 {
     if ([endpoint length]>0) {
         NSURL*endpointUrl=[[[AFHTTPSessionManager manager] baseURL] URLByAppendingPathComponent:endpoint];
+        if (!endpoint) XCTFail(@"Could not build a baseUrl with the stubbed endpoint: %@",endpoint);
         NSString*stringEndPoint= [NSString stringWithFormat:@"%@",endpointUrl];
         
         if ([stringEndPoint  length]>0) {
@@ -121,7 +126,7 @@
                     NSString    *queryString=[request.URL absoluteString];
                     stub    =   [queryString rangeOfString:endpoint].location!=NSNotFound;
                 }
-                NSLog(@"TEST STUB: TESTING IF STUB REQUEST %@, result %i",request,stub);
+                NSLog(@"TEST STUB: \r-----\rTESTING IF STUB REQUEST %@\r-----\r, result %i\r-----\r",request,stub);
                 return stub;
                 
             } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
@@ -133,7 +138,7 @@
                                 responseTime:responseTime];
             }];
             
-            stub.name=endpoint;
+            stub.name=[endpoint stringByAppendingString:[NSString stringWithFormat:@"_%lu",(unsigned long)operation]];
             return stub;
         }
         

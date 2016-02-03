@@ -13,6 +13,7 @@
 #import "DVAPopupViewConfigurator+PredefinedConfigurators.h"
 #import "DVAPopupViewButton+BasicButtons.h"
 #import "UILabel+AlertLabels.h"
+#import "NSString+DVALocalized.h"
 
 @implementation DVAPopupViewController (BasicAlerts)
 
@@ -31,9 +32,9 @@
     return controller;
 }
 +(DVAPopupViewController*)dva_alertWithText:(NSString*)string
-                                   andBlock:(void (^)(DVAPopupViewButton* buttonPressed))completionBlock;
+                                   andBlock:(DVAPopupButtonBlock)completionBlock;
 {
-    return [DVAPopupViewController dva_alertWithText:string okButtonText:@"OK" andBlock:completionBlock];
+    return [DVAPopupViewController dva_alertWithText:string okButtonText:[@"DVAPopupController_CANCEL_BUTTON" dva_localizedStringForTable:@"DVAPopupController" inBundle:[NSBundle bundleForClass:[DVAPopupViewController class]]] andBlock:completionBlock];
 }
 
 +(DVAPopupViewController *)dva_alertWithText:(NSString *)string
@@ -80,7 +81,7 @@
 
 +(DVAPopupViewController *)dva_alertWithAttributedText:(NSAttributedString *)string
                                               andBlock:(void (^)(DVAPopupViewButton *))completionBlock{
-    NSAttributedString *okString = [[NSAttributedString alloc] initWithString:@"OK"];
+    NSAttributedString *okString = [[NSAttributedString alloc] initWithString:[@"DVAPopupController_CANCEL_BUTTON" dva_localizedStringForTable:@"DVAPopupController" inBundle:[NSBundle bundleForClass:[DVAPopupViewController class]]]];
     return [DVAPopupViewController dva_alertWithAttributedText:string okButtonText:okString andBlock:completionBlock];
 }
 

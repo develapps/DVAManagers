@@ -7,10 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OHHTTPStubs/OHHTTPStubs.h>
-#import <OHHTTPStubs/OHHTTPStubsResponse+JSON.h>
-#import <OHHTTPStubs/OHPathHelpers.h>
-#import <AFNetworking/AFNetworking.h>
 
 /**
  Stubbing op type
