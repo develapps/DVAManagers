@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kDVALocationManagerErrorDomain;
-static NSString *const kDVALocationManagerAuthStatusKey;
+static NSString *const kDVALocationManagerErrorDomain   = @"kDVALocationManagerErrorDomain";
+static NSString *const kDVALocationManagerAuthStatusKey = @"kDVALocationManagerAuthStatusKey";
 
 typedef enum : NSUInteger {
     DVALocationManagerErrorGeneral                                      = 0,

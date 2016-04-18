@@ -8,8 +8,6 @@
 
 #import "NSError+DVALocationManager.h"
 
-static NSString *const kDVALocationManagerErrorDomain   = @"kDVALocationManagerErrorDomain";
-static NSString *const kDVALocationManagerAuthStatusKey = @"kDVALocationManagerAuthStatusKey";
 
 @implementation NSError (DVALocationManager)
 
