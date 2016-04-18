@@ -1,1 +1,1 @@
-pod repo push dvapods *.podspec --allow-warnings
+pod repo push dvapods *.podspec --allow-warnings --use-libraries
