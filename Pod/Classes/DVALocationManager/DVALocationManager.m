@@ -179,7 +179,10 @@
         if (error) { // Auth error
             self.completionBlock(nil,error);
         }
-        else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
+        else if ((self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedAlways && status != kCLAuthorizationStatusAuthorizedAlways) ||
+                 (self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedWhenInUse && status != kCLAuthorizationStatusAuthorizedWhenInUse) ||
+                 (self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedWhenInUse && status != kCLAuthorizationStatusAuthorizedAlways)
+                 ) { // We could not authorize at our required type
             self.completionBlock(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthBelowRequired
                                                         andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
         }
@@ -195,7 +198,10 @@
         if (error) { // Auth error
             self.completionBlock(nil,error);
         }
-        else if (status < self.dva_LocationAuthType) { // We could not authorize at our required type
+        else if ((self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedAlways && status != kCLAuthorizationStatusAuthorizedAlways) ||
+                 (self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedWhenInUse && status != kCLAuthorizationStatusAuthorizedWhenInUse) ||
+                 (self.dva_LocationAuthType==kCLAuthorizationStatusAuthorizedWhenInUse && status != kCLAuthorizationStatusAuthorizedAlways)
+                 ) { // We could not authorize at our required type
             self.completionBlock(nil,[NSError dva_locationErrorWithType:DVALocationManagerErrorAuthBelowRequired
                                                         andData:@{kDVALocationManagerAuthStatusKey : @(status)}]);
         }
