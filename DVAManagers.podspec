@@ -61,9 +61,9 @@ Added cache types at paginated resource
     end
 
     s.subspec 'DVAFacebookManager' do |ss|
-        ss.dependency 'FBSDKCoreKit', '~> 4.8'
-        ss.dependency 'FBSDKLoginKit', '~> 4.8'
-#        ss.dependency 'FBSDKShareKit', '~> 4.8'
+        ss.dependency 'FBSDKCoreKit', '~> 4.9'
+        ss.dependency 'FBSDKLoginKit', '~> 4.9'
+#        ss.dependency 'FBSDKShareKit', '~> 4.9'
         ss.dependency 'DVACache', '~>1.1'
         ss.source_files = 'Pod/Classes/DVAFacebookManager/*.{h,m}'
         ss.public_header_files = 'Pod/Classes/DVAFacebookManager/*.{h}'
