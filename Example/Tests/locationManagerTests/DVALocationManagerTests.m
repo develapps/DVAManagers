@@ -38,6 +38,7 @@
     [self waitForExpectationsWithTimeout:5 handler:nil];
 }
 
+
 - (void)DISABLED_testContinuousLocation {
     // Continuous location cannot be tested
     __block NSUInteger validWaypoints = 3;

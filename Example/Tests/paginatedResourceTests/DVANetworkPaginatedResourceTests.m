@@ -8,6 +8,8 @@
 
 @import XCTest;
 #import <DVANetworkTestStubs/XCTestCase+DVANetworkStub.h>
+#import <OHHTTPStubs/OHHTTPStubs.h>
+
 #import "TestsConstants.h"
 #import <DVAManagers/DVANetworkPaginatedResource.h>
 
