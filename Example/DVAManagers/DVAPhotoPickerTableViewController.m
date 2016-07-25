@@ -60,6 +60,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.dva_originSelector selectedSegmentIndex]!=0) {
         switch ([self.dva_originSelector selectedSegmentIndex]) {
+            case 0: // Select
+            {
+                self.manager = [DVAPhotoPickerManager dva_showPhotoPickerOnViewController:self
+                                                                                 withType:DVAPhotoPickerManagerSourceTypeAsk withCompletionBlock:^(UIImage *image, NSError *error) {
+                                                                                     if (error) {
+                                                                                         [DVAPopupViewController dva_alertWithText:[error localizedDescription]];
+                                                                                         return ;
+                                                                                     }
+                                                                                     [self.imageView setImage:image];
+                                                                                 }];
+            }
+                break;
+
             case 1: // CAmera
             {
                 self.manager = [DVAPhotoPickerManager dva_showPhotoPickerOnViewController:self

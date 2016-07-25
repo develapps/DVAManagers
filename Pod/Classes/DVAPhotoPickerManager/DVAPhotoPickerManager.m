@@ -41,8 +41,17 @@
     if (![UIImagePickerController isSourceTypeAvailable:type==DVAPhotoPickerManagerSourceTypeCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary]) {
         return nil;
     }
-    DVAPhotoPickerManager*manager = [[DVAPhotoPickerManager alloc] initWithViewController:controller andCompletionBlock:completion];
-    [manager dva_presentPhotoPickerOnViewController:controller withType:type];
+    
+    DVAPhotoPickerManager* manager = [[DVAPhotoPickerManager alloc] initWithViewController:controller andCompletionBlock:completion];
+
+    
+    
+    if (type==DVAPhotoPickerManagerSourceTypeAsk) {
+        [manager dva_showActionSheetPhotoOptions];
+    }
+    else{
+        [manager dva_presentPhotoPickerOnViewController:controller withType:type];
+    }
     return manager;
 }
 
