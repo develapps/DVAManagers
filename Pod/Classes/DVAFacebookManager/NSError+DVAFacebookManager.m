@@ -8,10 +8,6 @@
 
 #import "NSError+DVAFacebookManager.h"
 
-static NSString *const kDVAFacebookManagerErrorDomain   = @"kDVAFacebookManagerErrorDomain";
-static NSString *const kDVAFBKeyOriginalError   = @"kDVAFBKeyOriginalError";
-static NSString *const kDVAFBKeyFailingPermission = @"kDVAFBKeyFailingPermission";
-static NSString *const kDVAFBKeyResponseObject = @"kDVAFBKeyResponseObject";
 @implementation NSError (DVAPhotoPickerManager)
 
 +(NSError*)dva_facebookErrorWithType:(DVAFacebookManagerError)errorType{

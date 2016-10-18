@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DVAManagers"
-  s.version          = "1.2.6"
+  s.version          = "1.2.7"
   s.summary          = "Common DVAManagers for iOS Apps"
 
   s.description      = <<-DESC

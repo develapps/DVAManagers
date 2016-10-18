@@ -190,7 +190,7 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  
  @since 1.0.0
  */
-#warning should save that we should track the events
+
 - (void)dva_activateFacebookEvents;
 
 #pragma mark -

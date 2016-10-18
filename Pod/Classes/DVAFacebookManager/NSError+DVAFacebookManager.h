@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kDVAFacebookManagerErrorDomain;
-static NSString *const kDVAFBKeyOriginalError;
-static NSString *const kDVAFBKeyFailingPermission;
-static NSString *const kDVAFBKeyResponseObject;
+static NSString *const kDVAFacebookManagerErrorDomain   = @"kDVAFacebookManagerErrorDomain";
+static NSString *const kDVAFBKeyOriginalError   = @"kDVAFBKeyOriginalError";
+static NSString *const kDVAFBKeyFailingPermission = @"kDVAFBKeyFailingPermission";
+static NSString *const kDVAFBKeyResponseObject = @"kDVAFBKeyResponseObject";
 
 typedef enum : NSUInteger {
     kDVAFBEErrorGeneral                         = 0,
