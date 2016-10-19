@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic)   DVAFacebookManagerSuccessBlock sharingBlock;
 @property (nonatomic,strong)    DVACache*cache;
+@property (nonatomic,strong)    FBSDKLoginManager *login;
+
 @end
 
 @implementation DVAFacebookManager
@@ -37,8 +39,9 @@
 - (instancetype)init {
     
     if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunching:) name:UIApplicationDidFinishLaunchingNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-        
+        _login = [[FBSDKLoginManager alloc] init];
         _dva_permissions        = @[kDVAFBManagerFacebookEmail,
                                 kDVAFBManagerFacebookPublicProfile,
                                 kDVAFBManagerFacebookFriends];
@@ -88,8 +91,7 @@
 
 - (void)dva_loginWithCompletionBlock:(DVAFacebookManagerSuccessBlock)completionBlock {
     if (self.debug) NSLog(@"-- %s -- \n Starting login...",__PRETTY_FUNCTION__);
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:self.dva_permissions
+    [self.login logInWithReadPermissions:self.dva_permissions
                  fromViewController:nil
                             handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                 if (error) {
@@ -365,6 +367,10 @@
     if (self.debug) NSLog(@"-- %s -- \n Activating facebook events",__PRETTY_FUNCTION__);
     //Install traking
     [[DVAFacebookManager shared] dva_activateFacebookEvents];
+}
+
+-(void)applicationDidFinishLaunching:(NSNotification *)notification {
+    [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:notification.userInfo];
 }
 
 - (void)dealloc {
