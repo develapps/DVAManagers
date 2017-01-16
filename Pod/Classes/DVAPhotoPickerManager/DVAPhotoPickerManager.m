@@ -46,7 +46,7 @@
 
     
     
-    if (type==DVAPhotoPickerManagerSourceTypeAsk) {
+    if (type==DVAPhotoPickerManagerSourceTypeAsk) {
         [manager dva_showActionSheetPhotoOptions];
     }
     else{
@@ -165,7 +165,7 @@
             if (!processedImage)
             {
                 [picker dismissViewControllerAnimated:YES completion:^{
-                    if (self.completionBlock) self.completionBlock(nil,[NSError dva_photoErrorWithType:DVALocationManagerErrorPostProcessFailed andData:@{kDVAPhotoPickerManagerErrorPostProcess:postProcessor}]);
+                    if (self.completionBlock) self.completionBlock(nil,[NSError dva_photoErrorWithType:DVAPhotoPickerErrorPostProcessFailed andData:@{kDVAPhotoPickerManagerErrorPostProcess:postProcessor}]);
                 }];
                 return;
             }
@@ -185,7 +185,7 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if (self.debug) NSLog(@"-- %s -- \n Picker did cancel taking media %@",__PRETTY_FUNCTION__,picker);
     [picker dismissViewControllerAnimated:YES completion:^{
-        if (self.completionBlock)  self.completionBlock(nil,[NSError dva_photoErrorWithType:DVALocationManagerErrorCancelled]);
+        if (self.completionBlock)  self.completionBlock(nil,[NSError dva_photoErrorWithType:DVAPhotoPickerErrorCancelled]);
     }];
 }
 
