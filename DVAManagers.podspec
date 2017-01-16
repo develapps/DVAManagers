@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DVAManagers"
-  s.version          = "1.2.9"
+  s.version          = "1.2.10"
   s.summary          = "Common DVAManagers for iOS Apps"
 
   s.description      = <<-DESC
@@ -27,7 +27,7 @@ Added cache types at paginated resource
   s.homepage         = "https://bitbucket.org/dvalibs/dvamanagers"
   s.license          = 'MIT'
   s.author           = { "Pablo Romeu" => "pablo.romeu@develapps.com" }
-    s.source           = {      :git => "https://bitbucket.com/DVALibs/DVAManagers.git",
+    s.source           = {      :git => "https://github/develapps/DVAManagers.git",
                                 :tag => s.version.to_s,
                                 :submodules => true }
   s.social_media_url = 'https://twitter.com/pabloromeu'
