@@ -11,6 +11,15 @@
 
 #pragma mark - General keys
 
+static NSString *const kDVAFacebookManagerApplicationKey				= @"kDVAFacebookManagerApplicationKey";
+static NSString *const kDVAFacebookManagerDidFinishLaunchingOptions		= @"kDVAFacebookManagerDidFinishLaunchingOptions";
+
+
+static NSString *const kDVAFacebookManagerErrorDomain   = @"kDVAFacebookManagerErrorDomain";
+static NSString *const kDVAFBKeyOriginalError   = @"kDVAFBKeyOriginalError";
+static NSString *const kDVAFBKeyFailingPermission = @"kDVAFBKeyFailingPermission";
+static NSString *const kDVAFBKeyResponseObject = @"kDVAFBKeyResponseObject";
+
 static NSString * const kDVAFBManagerFacebookFields                     = @"fields";
 static NSString * const kDVAFBManagerFacebookType                     = @"type";
 static NSString * const kDVAFBManagerFacebookData                     = @"data";

@@ -27,11 +27,25 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
 /*!
  @author Pablo Romeu, 15-12-01 13:12:20
  
- A facebook manager class
+ A facebook manager class.
+ 
+ Setup:
+ - Call this class in didFinishLaunching
+ - Add FacebookAppID to plist
+ - Add LSApplicationQueriesSchemes to binary info
+ - Add urlScheme
+ - Add code
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+ return FBSDKApplicationDelegate.sharedInstance().application(app,
+ open: url,
+ sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!,
+ annotation: options[UIApplicationOpenURLOptionsKey.annotation] as! String!)
+	}
+ 
  
  @since 1.0.0
  */
-@interface DVAFacebookManager : NSObject 
+@interface DVAFacebookManager : NSObject
 
 /*!
  @author Pablo Romeu, 15-12-01 13:12:29
@@ -52,7 +66,7 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
 /*!
  @author Pablo Romeu, 15-12-01 13:12:28
  
- Requested permissions. 
+ Requested permissions.
  
  Defaults to kDVAFBManagerFacebookEmail, kDVAFBManagerFacebookPublicProfile and kDVAFBManagerFacebookFriends
  
@@ -94,9 +108,9 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  @since 1.0.0
  */
 -(void)dva_requestWithGraphPath:(NSString*)path
-                     httpMethod:(NSString*)method
-                  andParameters:(NSDictionary*)parameters
-             andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
+					 httpMethod:(NSString*)method
+				  andParameters:(NSDictionary*)parameters
+			 andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
 /*!
  @author Pablo Romeu, 15-12-01 14:12:53
  
@@ -111,8 +125,8 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  @since 1.0.0
  */
 -(void)dva_requestWithGraphPath:(NSString *)path
-                  andParameters:(NSDictionary *)parameters
-             andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
+				  andParameters:(NSDictionary *)parameters
+			 andCompletionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
 
 #pragma mark - login and permisions
 /*!
@@ -156,7 +170,7 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  @since 1.0.0
  */
 - (void)dva_askForExtraPermissions:(NSArray *)extraPermissions
-               withCompletionBlock:(DVAFacebookManagerSuccessBlock)completionBlock;
+			   withCompletionBlock:(DVAFacebookManagerSuccessBlock)completionBlock;
 
 /*!
  @author Pablo Romeu, 15-12-01 14:12:42
@@ -190,7 +204,6 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  
  @since 1.0.0
  */
-
 - (void)dva_activateFacebookEvents;
 
 #pragma mark -
@@ -210,11 +223,11 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  @since 1.0.0
  */
 - (void)dva_shareContentUrl:(NSURL *)contentURL
-                      title:(NSString *)title
-                description:(NSString *)description
-                   imageURL:(NSURL *)imageURL
-                 controller:(UIViewController *)controller
-                 completion:(DVAFacebookManagerSuccessBlock)completionBlock;
+					  title:(NSString *)title
+				description:(NSString *)description
+				   imageURL:(NSURL *)imageURL
+				 controller:(UIViewController *)controller
+				 completion:(DVAFacebookManagerSuccessBlock)completionBlock;
 
 
 #pragma mark - Usual helpers
@@ -266,7 +279,7 @@ typedef void(^DVAFacebookManagerSuccessBlock)(BOOL success, NSError *error);
  @since 1.0.0
  */
 - (void)dva_picturesWithAlbumId:(NSString *)albumId
-                completionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
+				completionBlock:(DVAFacebookManagerCompletionBlock)completionBlock;
 
 
 #pragma mark - friends
