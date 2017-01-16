@@ -24,10 +24,10 @@ Added cache types at paginated resource
 
                        DESC
 
-  s.homepage         = "https://bitbucket.org/dvalibs/dvamanagers"
+  s.homepage         = "https://github.com/develapps/dvamanagers"
   s.license          = 'MIT'
   s.author           = { "Pablo Romeu" => "pablo.romeu@develapps.com" }
-    s.source           = {      :git => "https://github/develapps/DVAManagers.git",
+    s.source           = {      :git => "https://github.com/develapps/DVAManagers.git",
                                 :tag => s.version.to_s,
                                 :submodules => true }
   s.social_media_url = 'https://twitter.com/pabloromeu'
